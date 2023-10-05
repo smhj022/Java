@@ -24,12 +24,28 @@ public class LinkedList {
 
     }
 
+    // Method to print all the element of linked list.
     public void printList(){
         Node temp = head;
         while (temp != null){
             System.out.println(temp.value);
             temp = temp.next;
         }
+    }
+
+    // Method to append elem in linked list.
+    public void appendElem(int value){
+        Node newNode = new Node(value);
+
+        if (this.length == 0){
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+
+            tail.next = newNode;
+            this.tail = newNode;
+        }
+        length ++;
     }
 
     public void getHead() {

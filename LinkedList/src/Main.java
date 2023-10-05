@@ -4,6 +4,9 @@ public class Main {
     public static void main(String[] args) {
         LinkedList LL = new LinkedList(4);
 
+        // Method to append elem in LL
+        LL.appendElem(6);
+
         LL.printList();
     }
 }
