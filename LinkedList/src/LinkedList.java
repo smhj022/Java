@@ -114,6 +114,14 @@ public class LinkedList {
         return temp;
     }
 
+    public Node getNodeByIndex(int index){
+        if (index > length || index < 0) return null;
+        Node temp = head;
+        for (int i=0; i<index; i++){
+            temp = temp.next;
+        }
+        return temp;
+    }
 
     // Method to get Head of the LL
     public void getHead() {
