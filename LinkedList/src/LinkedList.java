@@ -115,13 +115,26 @@ public class LinkedList {
     }
 
     public Node getNodeByIndex(int index){
-        if (index > length || index < 0) return null;
+        if (index >= length || index < 0) return null;
         Node temp = head;
         for (int i=0; i<index; i++){
             temp = temp.next;
         }
         return temp;
     }
+
+    public boolean setValueByIndex(int index, int value){
+        if (index >= length || index < 0) return false;
+        Node temp = head;
+        for (int i=0; i<length; i++){
+            if (i == index){
+                temp.value = value;
+            }
+            temp = temp.next;
+        }
+        return true;
+    };
+
 
     // Method to get Head of the LL
     public void getHead() {

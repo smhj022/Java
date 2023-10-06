@@ -11,13 +11,9 @@ public class Main {
         LL.appendElem(6);
 
         LL.printList();
-        LL.getHead();
-        LL.getTail();
-        LL.getLength();
 
-       int index = -1;
-
-       System.out.println(LL.getNodeByIndex(index));
+        System.out.println(LL.setValueByIndex(7,400));
+        LL.printList();
 
 
     }
