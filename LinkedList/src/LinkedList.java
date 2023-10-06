@@ -94,6 +94,26 @@ public class LinkedList {
         length++;
     }
 
+    //Method to remove the first element of the linked list
+    public Node removeFirst(){
+
+        Node temp;
+
+        if (length == 0){
+            return null;
+        } else if (length == 1) {
+            temp = head;
+            head = null;
+            tail = null;
+        } else {
+            temp = head;
+            head = null;
+            head = temp.next;
+        }
+        length--;
+        return temp;
+    }
+
 
     // Method to get Head of the LL
     public void getHead() {

@@ -5,14 +5,19 @@ public class Main {
         LinkedList LL = new LinkedList(1);
 //
 //        // Method to append elem in LL
-//        LL.appendElem(2);
-//        LL.appendElem(3);
-//        LL.prependElem(100);
-//
-//        LL.printList();
-//        System.out.println("Removed element from Linked List : " + LL.removeLast().value);
-//        LL.printList();
+        LL.appendElem(2);
+        LL.appendElem(3);
+        LL.printList();
+        LL.getLength();
+        LL.getHead();
 
+        System.out.println("After remove");
+
+        System.out.println("removed element " + LL.removeFirst().value);
+
+        LL.getHead();
+        LL.printList();
+        LL.getLength();
 
     }
 }
