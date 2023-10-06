@@ -81,6 +81,19 @@ public class LinkedList {
         return temp;
     }
 
+    // function to add element at the start
+    public void prependElem(int value){
+        Node newNode = new Node(value);
+        if (length == 0){
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
+
 
     // Method to get Head of the LL
     public void getHead() {
