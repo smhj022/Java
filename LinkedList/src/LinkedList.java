@@ -143,7 +143,9 @@ public class LinkedList {
             return false;
         } else if (index == 0) {
             prependElem(value);
-        } else {
+        } else if (index == length){
+            appendElem(value);
+        }else {
             Node newNode = new Node(value);
             Node temp = getNodeByIndex(index - 1);
 
@@ -153,6 +155,26 @@ public class LinkedList {
 
         }
         return true;
+    }
+
+    public Node removeElemByIndex(int index){
+
+        Node removedElem;
+
+        if (index < 0 || index >= length) {
+            return null;
+        } else if (index == 0){
+            removedElem = removeFirst();
+        } else if (index == length-1) {
+            removedElem = removeLast();
+        } else {
+            Node temp = getNodeByIndex(index-1);
+            removedElem = temp.next;
+            temp.next = removedElem.next;
+            removedElem.next = null;
+            length--;
+        }
+    return removedElem;
     }
 
 
