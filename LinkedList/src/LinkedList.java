@@ -136,6 +136,26 @@ public class LinkedList {
     };
 
 
+    // Method to insert element at a particular index position
+    public boolean insertElem(int index, int value){
+
+        if (index < 0 || index > length){
+            return false;
+        } else if (index == 0) {
+            prependElem(value);
+        } else {
+            Node newNode = new Node(value);
+            Node temp = getNodeByIndex(index - 1);
+
+            newNode.next = temp.next;
+            temp.next = newNode;
+            length++;
+
+        }
+        return true;
+    }
+
+
     // Method to get Head of the LL
     public void getHead() {
         System.out.println("Head: " + head.value);
