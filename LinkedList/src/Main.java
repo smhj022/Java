@@ -10,12 +10,16 @@ public class Main {
         LL.appendElem(5);
         LL.appendElem(6);
 
-        LL.getLength();
+//        LL.getLength();
+//
+//        System.out.println(LL.removeElemByIndex(6).value);
+//
 
-        System.out.println(LL.removeElemByIndex(6).value);
+//       LL.getLength();
 
-       LL.printList();
-       LL.getLength();
+        LL.reverse();
+        LL.printList();
+
 
 
 
