@@ -177,21 +177,60 @@ public class LinkedList {
     return removedElem;
     }
 
+//    public void reverse(){
+//        Node temp = head;
+//        head = tail;
+//        tail = temp;
+//
+//        Node after = temp.next;
+//        Node before = null;
+//
+//        for(int i=0; i<length;i++){
+//            after=temp.next;
+//            temp.next = before;
+//            before = temp;
+//            temp = after;
+//        }
+//    }
+
     public void reverse(){
         Node temp = head;
         head = tail;
         tail = temp;
-
-        Node after = temp.next;
+        System.out.println("Head " + head.value);
+        System.out.println("Tail " + tail.value);
         Node before = null;
+        Node after = temp.next;
+        System.out.println("temp " + temp.value);
 
-        for(int i=0; i<length;i++){
-            after=temp.next;
+        for (int i = 0; i < length; i++){
+            after = temp.next;
             temp.next = before;
             before = temp;
             temp = after;
         }
+
     }
+
+    // Refer Question 1.
+    public Node findMiddleNode(){
+
+        Node slow = head;
+        Node fast = head;
+
+        if(head == tail || head == null){
+            return null;
+        } else {
+            while(fast != null && fast.next != null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+        }
+
+        return slow;
+    }
+
+
 
 
     // Method to get Head of the LL
