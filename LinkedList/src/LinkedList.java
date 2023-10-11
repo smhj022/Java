@@ -249,12 +249,28 @@ public class LinkedList {
             slow = slow.next;
             fast = fast.next.next;
         }
+        return fast == slow;
+    }
 
-        if (fast == slow){
-            return true;
+    // Question 3: Method to find Kth node from the end of the linked list.
+    public Node findKthFromEnd(int k) {
+
+        if (head == null) return null;
+
+        Node before = head;
+        Node after = head;
+
+        for (int i = 1; i < k; i++) {
+            System.out.println(after.value);
+            if (after.next == null) return null;
+            after = after.next;
         }
 
-        return false;
+        while (after != tail) {
+            after = after.next;
+            before = before.next;
+        }
+        return before;
     }
 
 

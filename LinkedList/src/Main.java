@@ -9,8 +9,10 @@ public class Main {
         LL.appendElem(4);
         LL.appendElem(5);
         LL.appendElem(6);
-        LL.printList();
 
-        System.out.println(LL.findMiddleNode().value);
+
+//        System.out.println(LL.findMiddleNode().value);
+
+        System.out.println(LL.findKthFromEnd(10).value);
     }
 }

@@ -41,6 +41,14 @@ otherwise, it should return false.
 
 -------------------------------------------------------------------------
 
+Question 3: Find Kth node from the end
+
+Implement a method called findKthFromEnd that returns the k-th node from the
+end of the list. If the list has fewer than k nodes, the method should return null.
+
+Note: This implementation of the Linked List class does not have the length attribute.
+So length variable can not be used.
+
  */
 
 
