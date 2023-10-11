@@ -231,6 +231,33 @@ public class LinkedList {
     }
 
 
+    // Question2: method to find if a linked list has a loop or not
+    public boolean hasLoop(){
+
+        if (head == null || head == tail){
+            return false;
+        }
+
+        Node slow = null;
+        Node fast = head;
+
+
+        while (fast != slow && fast != null && fast.next != null){
+            if (slow == null){
+                slow = head;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        if (fast == slow){
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
     // Method to get Head of the LL
