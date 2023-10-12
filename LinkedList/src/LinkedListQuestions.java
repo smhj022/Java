@@ -41,7 +41,9 @@ otherwise, it should return false.
 
 -------------------------------------------------------------------------
 
-Question 3: Find Kth node from the end
+Question 3: Find Kth node from the end of a singly linked list
+
+Singly Linked list does not have tail.
 
 Implement a method called findKthFromEnd that returns the k-th node from the
 end of the list. If the list has fewer than k nodes, the method should return null.
@@ -50,6 +52,22 @@ Note: This implementation of the Linked List class does not have the length attr
 So length variable can not be used.
 
 -------------------------------------------------------------------------------------
+
+Question 3: Remove Duplicates
+
+You are given a singly linked list that contains integer values, where some of these
+values may be duplicated.
+
+Your task is to implement a method called removeDuplicates() within the LinkedList
+class that removes all duplicate values from the list.
+
+Your method should not create a new list, but rather modify the existing list in-place,
+ preserving the relative order of the nodes.
+
+----------------------------------------------------------------------------------------
+
+
+
 
  */
 

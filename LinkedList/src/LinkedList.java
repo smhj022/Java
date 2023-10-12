@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LinkedList {
 
@@ -38,7 +40,7 @@ public class LinkedList {
     public void printList() {
         Node temp = head;
         while (temp != null) {
-            System.out.println(temp.value);
+            System.out.print(temp.value + " ");
             temp = temp.next;
         }
     }
@@ -317,6 +319,24 @@ public class LinkedList {
     }
 
 
+    public void removeDuplicates(){
+
+        // using Hashset
+        Set<Integer> set = new HashSet<Integer>();
+        Node current = head;
+        Node previous = null;
+
+        while(current != null){
+            if(set.contains(current.value)){
+                previous.next = current.next;
+            } else {
+                set.add(current.value);
+                previous = current;
+            }
+            current = current.next;
+        }
+
+    }
 
 
     // Method to get Head of the LL

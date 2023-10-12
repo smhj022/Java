@@ -4,16 +4,17 @@ public class Main {
     public static void main(String[] args) {
         LinkedList LL = new LinkedList(3);
 //        LL.appendElem(1);
-        LL.appendElem(8);
-        LL.appendElem(5);
-        LL.appendElem(10);
         LL.appendElem(2);
         LL.appendElem(1);
+        LL.appendElem(1);
+        LL.appendElem(1);
+        LL.appendElem(6);
+        LL.appendElem(7);
 
 
         //System.out.println(LL.findMiddleNode().value);
 
-        LL.partitionList(5);
+        LL.removeDuplicates();
         LL.printList();
     }
 }
