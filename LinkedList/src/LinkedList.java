@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
-
+import java.lang.Math;
 public class LinkedList {
 
     // Variable head of Node type
@@ -201,11 +201,8 @@ public class LinkedList {
         Node temp = head;
         head = tail;
         tail = temp;
-        System.out.println("Head " + head.value);
-        System.out.println("Tail " + tail.value);
         Node before = null;
         Node after = temp.next;
-        System.out.println("temp " + temp.value);
 
         for (int i = 0; i < length; i++) {
             after = temp.next;
@@ -336,6 +333,21 @@ public class LinkedList {
             current = current.next;
         }
 
+    }
+
+    public int binaryToDecimal() {
+
+        if (head == null) return 0;
+        Node temp1 = head;
+        int sum = 0;
+        int itr = length - 1;
+
+        while (temp1 != null) {
+            sum += temp1.value * (int) Math.pow(2, itr);
+            itr--;
+            temp1 = temp1.next;
+        }
+        return sum;
     }
 
 

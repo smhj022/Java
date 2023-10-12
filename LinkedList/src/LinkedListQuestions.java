@@ -53,7 +53,7 @@ So length variable can not be used.
 
 -------------------------------------------------------------------------------------
 
-Question 3: Remove Duplicates
+Question 4: Remove Duplicates
 
 You are given a singly linked list that contains integer values, where some of these
 values may be duplicated.
@@ -66,8 +66,13 @@ Your method should not create a new list, but rather modify the existing list in
 
 ----------------------------------------------------------------------------------------
 
+Question 5: Binary to Decimal Linked List
 
+You have a linked list where each node represents a binary digit (0 or 1).
+The goal of the binaryToDecimal function is to convert this binary number,
+represented by the linked list, into its decimal equivalent.
 
+e.g. -> 101 -> 1 * 2^0 + 0 * 2^1 + 1 * 2^2 = 5
 
  */
 
