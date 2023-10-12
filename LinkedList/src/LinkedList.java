@@ -14,19 +14,19 @@ public class LinkedList {
 
 
     // Class for Node
-    public class Node{
+    public class Node {
         int value;
         Node next;
 
         //Node constructor
-        Node(int value){
+        Node(int value) {
             this.value = value;
         }
     }
 
 
     // Constructor to start the LL
-    public LinkedList(int value){
+    public LinkedList(int value) {
         Node newNode = new Node(value);
         this.head = newNode;
         this.tail = newNode;
@@ -35,29 +35,29 @@ public class LinkedList {
     }
 
     // Method to print all the element of linked list.
-    public void printList(){
+    public void printList() {
         Node temp = head;
-        while (temp != null){
+        while (temp != null) {
             System.out.println(temp.value);
             temp = temp.next;
         }
     }
 
     // Method to append elem in linked list.
-    public void appendElem(int value){
+    public void appendElem(int value) {
         Node newNode = new Node(value);
 
-        if (this.length == 0){
+        if (this.length == 0) {
             this.head = newNode;
             this.tail = newNode;
         } else {
             tail.next = newNode;
             this.tail = newNode;
         }
-        length ++;
+        length++;
     }
 
-    public Node removeLast(){
+    public Node removeLast() {
 
         Node temp = head;
         Node pre = head;
@@ -71,7 +71,7 @@ public class LinkedList {
             return temp;
         }
 
-        while (temp.next != null){
+        while (temp.next != null) {
             pre = temp;
             temp = temp.next;
         }
@@ -82,9 +82,9 @@ public class LinkedList {
     }
 
     // function to add element at the start
-    public void prependElem(int value){
+    public void prependElem(int value) {
         Node newNode = new Node(value);
-        if (length == 0){
+        if (length == 0) {
             head = newNode;
             tail = newNode;
         } else {
@@ -95,11 +95,11 @@ public class LinkedList {
     }
 
     //Method to remove the first element of the linked list
-    public Node removeFirst(){
+    public Node removeFirst() {
 
         Node temp;
 
-        if (length == 0){
+        if (length == 0) {
             return null;
         } else if (length == 1) {
             temp = head;
@@ -114,38 +114,40 @@ public class LinkedList {
         return temp;
     }
 
-    public Node getNodeByIndex(int index){
+    public Node getNodeByIndex(int index) {
         if (index >= length || index < 0) return null;
         Node temp = head;
-        for (int i=0; i<index; i++){
+        for (int i = 0; i < index; i++) {
             temp = temp.next;
         }
         return temp;
     }
 
-    public boolean setValueByIndex(int index, int value){
+    public boolean setValueByIndex(int index, int value) {
         if (index >= length || index < 0) return false;
         Node temp = head;
-        for (int i=0; i<length; i++){
-            if (i == index){
+        for (int i = 0; i < length; i++) {
+            if (i == index) {
                 temp.value = value;
             }
             temp = temp.next;
         }
         return true;
-    };
+    }
+
+    ;
 
 
     // Method to insert element at a particular index position
-    public boolean insertElem(int index, int value){
+    public boolean insertElem(int index, int value) {
 
-        if (index < 0 || index > length){
+        if (index < 0 || index > length) {
             return false;
         } else if (index == 0) {
             prependElem(value);
-        } else if (index == length){
+        } else if (index == length) {
             appendElem(value);
-        }else {
+        } else {
             Node newNode = new Node(value);
             Node temp = getNodeByIndex(index - 1);
 
@@ -157,24 +159,24 @@ public class LinkedList {
         return true;
     }
 
-    public Node removeElemByIndex(int index){
+    public Node removeElemByIndex(int index) {
 
         Node removedElem;
 
         if (index < 0 || index >= length) {
             return null;
-        } else if (index == 0){
+        } else if (index == 0) {
             removedElem = removeFirst();
-        } else if (index == length-1) {
+        } else if (index == length - 1) {
             removedElem = removeLast();
         } else {
-            Node temp = getNodeByIndex(index-1);
+            Node temp = getNodeByIndex(index - 1);
             removedElem = temp.next;
             temp.next = removedElem.next;
             removedElem.next = null;
             length--;
         }
-    return removedElem;
+        return removedElem;
     }
 
 //    public void reverse(){
@@ -193,7 +195,7 @@ public class LinkedList {
 //        }
 //    }
 
-    public void reverse(){
+    public void reverse() {
         Node temp = head;
         head = tail;
         tail = temp;
@@ -203,7 +205,7 @@ public class LinkedList {
         Node after = temp.next;
         System.out.println("temp " + temp.value);
 
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             after = temp.next;
             temp.next = before;
             before = temp;
@@ -213,15 +215,15 @@ public class LinkedList {
     }
 
     // Refer Question 1.
-    public Node findMiddleNode(){
+    public Node findMiddleNode() {
 
         Node slow = head;
         Node fast = head;
 
-        if(head == tail || head == null){
+        if (head == tail || head == null) {
             return null;
         } else {
-            while(fast != null && fast.next != null){
+            while (fast != null && fast.next != null) {
                 slow = slow.next;
                 fast = fast.next.next;
             }
@@ -232,9 +234,9 @@ public class LinkedList {
 
 
     // Question2: method to find if a linked list has a loop or not
-    public boolean hasLoop(){
+    public boolean hasLoop() {
 
-        if (head == null || head == tail){
+        if (head == null || head == tail) {
             return false;
         }
 
@@ -242,8 +244,8 @@ public class LinkedList {
         Node fast = head;
 
 
-        while (fast != slow && fast != null && fast.next != null){
-            if (slow == null){
+        while (fast != slow && fast != null && fast.next != null) {
+            if (slow == null) {
                 slow = head;
             }
             slow = slow.next;
@@ -271,6 +273,47 @@ public class LinkedList {
             before = before.next;
         }
         return before;
+    }
+
+
+    public void partitionList(int x) {
+
+        if (head == null) return;
+
+        Node less_head = null;
+        Node more_head = null;
+        Node current = head;
+        Node less_temp = head;
+        Node more_temp = head;
+
+
+        while (current !=null){
+            if (current.value < x){
+
+                if (less_head == null) {
+                    less_head = current;
+                    less_temp = current;
+                } else {
+                    less_temp.next = current;
+                    less_temp = less_temp.next;
+                }
+            } else {
+                if (more_head == null) {
+                    more_head = current;
+                    more_temp = current;
+                } else {
+                    more_temp.next = current;
+                    more_temp = more_temp.next;
+                }
+            }
+            current = current.next;
+        }
+
+        if (less_head == null || more_head == null) return;
+
+        head = less_head;
+        less_temp.next = more_head;
+        more_temp.next = null;
     }
 
 
