@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 import java.lang.Math;
@@ -43,6 +41,7 @@ public class LinkedList {
             System.out.print(temp.value + " ");
             temp = temp.next;
         }
+        System.out.println("");
     }
 
     // Method to append elem in linked list.
@@ -262,7 +261,6 @@ public class LinkedList {
         Node after = head;
 
         for (int i = 1; i < k; i++) {
-            System.out.println(after.value);
             if (after.next == null) return null;
             after = after.next;
         }
@@ -348,6 +346,35 @@ public class LinkedList {
             temp1 = temp1.next;
         }
         return sum;
+    }
+
+//
+
+    public void reverseBetween(int startIndex, int endIndex){
+
+        // Empty linked list
+        if (head == null) return;
+
+        Node dummyNode = new Node(0);
+        dummyNode.next = head;
+        Node previousNode = dummyNode;
+
+        for(int i=0; i<startIndex; i++){
+            previousNode = previousNode.next;
+        }
+
+        Node currentNode = previousNode.next;
+
+
+        for (int i=0; i< (endIndex - startIndex); i++){
+            Node nodeToMove = currentNode.next;
+            currentNode.next = nodeToMove.next;
+            nodeToMove.next = previousNode.next;
+            previousNode.next = nodeToMove;
+            printList();
+        }
+
+        head = dummyNode.next;
     }
 
 

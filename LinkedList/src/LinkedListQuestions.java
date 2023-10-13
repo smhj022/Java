@@ -53,7 +53,27 @@ So length variable can not be used.
 
 -------------------------------------------------------------------------------------
 
-Question 4: Remove Duplicates
+Question 4: Partition List
+
+You have a singly linked list that DOES NOT HAVE A TAIL POINTER
+(which will make this method simpler to implement).
+
+Given a value x you need to rearrange the linked list such that all nodes with a
+value less than x come before all nodes with a value greater than or equal to x.
+
+Additionally, the relative order of nodes in both partitions should remain
+unchanged.
+
+Constraints:
+
+The solution should traverse the linked list at most once.
+
+The solution should not create a new linked list.
+
+
+-------------------------------------------------------------------------------------
+
+Question 5: Remove Duplicates
 
 You are given a singly linked list that contains integer values, where some of these
 values may be duplicated.
@@ -66,7 +86,7 @@ Your method should not create a new list, but rather modify the existing list in
 
 ----------------------------------------------------------------------------------------
 
-Question 5: Binary to Decimal Linked List
+Question 6: Binary to Decimal Linked List
 
 You have a linked list where each node represents a binary digit (0 or 1).
 The goal of the binaryToDecimal function is to convert this binary number,
@@ -74,6 +94,9 @@ represented by the linked list, into its decimal equivalent.
 
 e.g. -> 101 -> 1 * 2^0 + 0 * 2^1 + 1 * 2^2 = 5
 
+------------------------------------------------------------------------------------
+
+Question 7: Reverse a linked list between indices
  */
 
 
