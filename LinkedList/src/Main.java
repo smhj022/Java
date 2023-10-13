@@ -11,8 +11,7 @@ public class Main {
 //        LL.appendElem(6);
 //        LL.appendElem(7);
 
-        LL.reverseBetween(1,3);
-        LL.printList();
+        System.out.println(LL.removeKthFormEnd(3).value);
 
     }
 }

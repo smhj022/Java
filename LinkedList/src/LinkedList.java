@@ -284,8 +284,8 @@ public class LinkedList {
         Node more_temp = head;
 
 
-        while (current !=null){
-            if (current.value < x){
+        while (current != null) {
+            if (current.value < x) {
 
                 if (less_head == null) {
                     less_head = current;
@@ -314,15 +314,15 @@ public class LinkedList {
     }
 
 
-    public void removeDuplicates(){
+    public void removeDuplicates() {
 
         // using Hashset
         Set<Integer> set = new HashSet<Integer>();
         Node current = head;
         Node previous = null;
 
-        while(current != null){
-            if(set.contains(current.value)){
+        while (current != null) {
+            if (set.contains(current.value)) {
                 previous.next = current.next;
             } else {
                 set.add(current.value);
@@ -350,7 +350,7 @@ public class LinkedList {
 
 //
 
-    public void reverseBetween(int startIndex, int endIndex){
+    public void reverseBetween(int startIndex, int endIndex) {
 
         // Empty linked list
         if (head == null) return;
@@ -359,14 +359,14 @@ public class LinkedList {
         dummyNode.next = head;
         Node previousNode = dummyNode;
 
-        for(int i=0; i<startIndex; i++){
+        for (int i = 0; i < startIndex; i++) {
             previousNode = previousNode.next;
         }
 
         Node currentNode = previousNode.next;
 
 
-        for (int i=0; i< (endIndex - startIndex); i++){
+        for (int i = 0; i < (endIndex - startIndex); i++) {
             Node nodeToMove = currentNode.next;
             currentNode.next = nodeToMove.next;
             nodeToMove.next = previousNode.next;
@@ -376,6 +376,38 @@ public class LinkedList {
 
         head = dummyNode.next;
     }
+
+    public Node removeKthFormEnd(int k) {
+
+        if (head == null) return null;
+
+        int size=0;
+        Node temp = head;
+
+        while(temp != null){
+            size++;
+            temp = temp.next;
+        }
+
+        if (size == k){
+            return removeFirst();
+        }
+
+        int previousNodeIndex = size - k;
+
+        temp = head;
+
+        for(int i = 1; i < previousNodeIndex; i++){
+            temp=temp.next;
+        }
+
+        Node removedNode = temp.next;
+        temp.next = temp.next.next;
+
+        return removedNode;
+    }
+
+
 
 
     // Method to get Head of the LL
