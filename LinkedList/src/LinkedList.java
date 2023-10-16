@@ -215,18 +215,15 @@ public class LinkedList {
     // Refer Question 1.
     public Node findMiddleNode() {
 
+        if (head == tail || head == null) return null;
+
         Node slow = head;
         Node fast = head;
 
-        if (head == tail || head == null) {
-            return null;
-        } else {
-            while (fast != null && fast.next != null) {
-                slow = slow.next;
-                fast = fast.next.next;
-            }
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-
         return slow;
     }
 
@@ -407,6 +404,87 @@ public class LinkedList {
         return removedNode;
     }
 
+//    public Node reverseLL(Node LLHead){
+//
+//        Node reserveHead = head;
+//
+//        Node pre = null;
+//        Node curr = head;
+//
+//        while(curr != null){
+//
+//            Node temp = curr.next;
+//            curr.next = pre;
+//            pre = curr;
+//            curr = temp;
+//        }
+//
+//        return pre;
+//    }
+//
+//    public boolean isPalindrome(){
+//
+//        // divide the linked list half
+//        // reverse the other half
+//        // compare both half
+//
+//        Node middleNode = findMiddleNode();
+//        Node secondHalfStart = reverseLL(middleNode);
+//        Node firstHalfStart = head;
+//
+//        printList();
+//
+//
+//        while (secondHalfStart != null){
+//
+//            if (firstHalfStart.value != secondHalfStart.value){
+//                return false;
+//            }
+//            firstHalfStart=firstHalfStart.next;
+//            secondHalfStart=secondHalfStart.next;
+//        }
+//        return true;
+//    }
+
+    public void removeElemByValue(int value){
+        Node after = head.next;
+        Node before = head;
+
+        while(after != null){
+
+            if (after.value == value){
+                before.next = after.next;
+            }
+            else{
+                before = before.next;
+            }
+            after = after.next;
+        }
+
+        if (head.value == value){
+            head = head.next;
+        }
+
+    }
+
+
+    // delete the duplicates from a sorted linked list.
+    public void deleteDuplicates() {
+
+        Node pre = head;
+        Node curr = head.next;
+
+        while(curr != null) {
+
+            if (pre.value != curr.value) {
+                pre = pre.next;
+            } else {
+                pre.next = curr.next;
+            }
+            curr = curr.next;
+
+        }
+    }
 
 
 

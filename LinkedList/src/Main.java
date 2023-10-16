@@ -3,15 +3,16 @@
 public class Main {
     public static void main(String[] args) {
         LinkedList LL = new LinkedList(1);
-//        LL.appendElem(1);
+        LL.appendElem(2);
         LL.appendElem(2);
         LL.appendElem(3);
         LL.appendElem(4);
         LL.appendElem(5);
-//        LL.appendElem(6);
-//        LL.appendElem(7);
+//        LL.appendElem(4);
+//        LL.appendElem(5);
+//        LL.appendElem(6)
 
-        System.out.println(LL.removeKthFormEnd(3).value);
-
+        LL.deleteDuplicates();
+        LL.printList();
     }
 }
