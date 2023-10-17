@@ -12,7 +12,6 @@ public class LinkedList {
     // Variable for length of LL
     private int length;
 
-
     // Class for Node
     public class Node {
         int value;
@@ -468,7 +467,7 @@ public class LinkedList {
     }
 
 
-    // delete the duplicates from a sorted linked list.
+    // delete the duplicates from a sorted linked list.:q
     public void deleteDuplicates() {
 
         Node pre = head;
@@ -484,6 +483,45 @@ public class LinkedList {
             curr = curr.next;
 
         }
+    }
+
+
+    public void mergeLinkedList(LinkedList list1, LinkedList list2){
+
+        Node dummy = new Node(-1);
+
+
+        Node p1 = list1.head;
+        Node p2 = list2.head;
+        Node p3 = dummy;
+
+//        System.out.println("iteration 1 " + p1.value + " " + p2.value + " " + p3.value);
+
+        while (p1!=null && p2!=null){
+
+            if(p1.value < p2.value){
+                p3.next = p1;
+                p1 = p1.next;
+            }else {
+                p3.next = p2;
+                p2 = p2.next;
+            }
+            p3 = p3.next;
+        }
+
+        while(p2 != null){
+            p3.next = p2;
+            p2 = p2.next;
+            p3 = p3.next;
+        }
+
+        while(p1 != null){
+            p3.next = p1;
+            p1 = p1.next;
+            p3 = p3.next;
+        }
+
+        printList();
     }
 
 
