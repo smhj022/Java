@@ -7,18 +7,9 @@ public class Main {
         DoublyLinkedList DLL = new DoublyLinkedList(7);
         DLL.append(5);
         DLL.append(9);
+        DLL.append(12);
 
-        DLL.getHead();
-        DLL.getTail();
-
-        System.out.println(DLL.removeFirst().value);
-
+        DLL.set(7,3);
         DLL.printList();
-
-
-
-
-
-
     }
 }
