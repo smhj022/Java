@@ -149,27 +149,49 @@ public class DoublyLinkedList {
 
         if (index < 0 || index > length) return false;
 
+        // insert at start
         if (index == 0) {
             prepend(value);
             return true;
         }
-
-        if (index == length){
+        // insert at end
+        else if (index == length){
             append(value);
             return true;
         }
 
+        // insert node in between
         Node newNode = new Node(value);
-
-        Node beforeNode = get(index-1);
-
+        Node beforeNode = get(index - 1);
         Node afterNode = beforeNode.next;
-
         beforeNode.next = newNode;
         newNode.next = afterNode;
         newNode.prev = beforeNode;
         afterNode.prev = newNode;
-
+        length++;
         return true;
+    }
+
+    public Node remove(int index){
+
+        if(index < 0 || index >= length) return null;
+        // remove form start
+        if (index == 0) return removeFirst();
+        // remove from end
+        if (index == length-1) return removeLast();
+
+        // remove nodes in between
+        Node removedNode;
+        Node beforeNode = get(index-1);
+        removedNode = beforeNode.next;
+        Node afterNode = removedNode.next;
+
+
+        beforeNode.next = removedNode.next;
+        afterNode.prev = removedNode.prev;
+        removedNode.next = null;
+        removedNode.prev = null;
+        length--;
+        return removedNode;
     }
 }
