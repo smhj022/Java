@@ -9,7 +9,7 @@ public class Main {
         DLL.append(9);
         DLL.append(12);
 
-        DLL.set(7,3);
+        DLL.insert(2,3);
         DLL.printList();
     }
 }

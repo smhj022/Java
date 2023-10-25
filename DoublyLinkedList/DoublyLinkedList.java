@@ -144,4 +144,32 @@ public class DoublyLinkedList {
         getNode.value = value;
         return true;
     }
+
+    public boolean insert(int index, int value){
+
+        if (index < 0 || index > length) return false;
+
+        if (index == 0) {
+            prepend(value);
+            return true;
+        }
+
+        if (index == length){
+            append(value);
+            return true;
+        }
+
+        Node newNode = new Node(value);
+
+        Node beforeNode = get(index-1);
+
+        Node afterNode = beforeNode.next;
+
+        beforeNode.next = newNode;
+        newNode.next = afterNode;
+        newNode.prev = beforeNode;
+        afterNode.prev = newNode;
+
+        return true;
+    }
 }
