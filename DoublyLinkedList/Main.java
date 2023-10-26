@@ -8,8 +8,9 @@ public class Main {
         DLL.append(1);
         DLL.append(2);
         DLL.append(3);
+//        DLL.append(4);
 
-        DLL.remove(4);
+        DLL.reverse();
         DLL.printList();
     }
 }

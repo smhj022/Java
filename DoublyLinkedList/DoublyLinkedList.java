@@ -194,4 +194,35 @@ public class DoublyLinkedList {
         length--;
         return removedNode;
     }
+
+    // Method to swap first and last node of an DLL
+    public void swapFirstLast(){
+        if(head==null || head==tail)return;
+
+        int temp = head.value;
+        head.value = tail.value;
+        tail.value = temp;
+    }
+
+    // Method to reverse a DLL
+    public void reverse(){
+
+        if(head == null || head == tail) return;
+
+        Node p1 = head;
+        Node p2 = tail;
+
+        int iter = 0;
+
+        while(iter < length/2) {
+
+            int temp = p1.value;
+            p1.value = p2.value;
+            p2.value = temp;
+
+            p1 = p1.next;
+            p2 = p2.prev;
+            iter++;
+        }
+    }
 }
