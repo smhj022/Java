@@ -1,5 +1,7 @@
 package DoublyLinkedList;
 
+import java.util.Optional;
+
 public class DoublyLinkedList {
 
     private Node head;
@@ -28,7 +30,7 @@ public class DoublyLinkedList {
     public void printList(){
         Node temp = head;
         while(temp != null){
-            System.out.println(temp.value);
+            System.out.print(temp.value + " ");
             temp = temp.next;
         }
     }
@@ -224,5 +226,37 @@ public class DoublyLinkedList {
             p2 = p2.prev;
             iter++;
         }
+    }
+
+    public void swapPairs(){
+
+        if(head == null || head.next == null) return;
+
+        Node dummyNode = new Node(0);
+        dummyNode.next = head;
+        head.prev = dummyNode;
+        head = dummyNode;
+
+        Node p1 = head.next;
+        Node p2 = head.next.next;
+
+        while(p1 != null && p1.next != null){
+
+            p2 = p1.next;
+
+            p1.next = p2.next;
+            p2.next = p1;
+            if (p1.next != null){
+                p1.next.prev = p1;
+            }
+
+            p2.prev = p1.prev;
+            p1.prev.next = p2;
+            p1.prev = p2;
+            p1 = p1.next;
+        }
+
+        head = head.next;
+        head.prev = null;
     }
 }
