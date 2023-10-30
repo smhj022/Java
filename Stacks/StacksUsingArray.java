@@ -40,4 +40,5 @@ public class StacksUsingArray<T> {
         if(stackList.isEmpty()) return null;
         return stackList.remove(stackList.size()-1);
     }
+
 }
