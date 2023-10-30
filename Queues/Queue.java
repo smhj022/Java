@@ -66,8 +66,8 @@ public class Queue {
     public Node dequeue(){
 
         if(first == null) return null;
-        Node temp = first;
 
+        Node temp = first;
         if(first == last){
             first = null;
             last = null;
