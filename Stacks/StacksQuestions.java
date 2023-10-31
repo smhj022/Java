@@ -18,6 +18,7 @@ By "balanced," we mean that for every open parenthesis, there is a matching clos
 
  */
 
+
 class Parentheses {
     public boolean isBalancedParentheses(String testSt) {
 
@@ -38,12 +39,55 @@ class Parentheses {
 }
 
 
+/*
+Question 2: Sorted the stack
+*/
+
+
+class StackSorting{
+
+    public void sortStack(Stack<Integer> stack) {
+
+        Stack<Integer> tempStack = new Stack<>();
+
+        while (!stack.isEmpty()) {
+
+            int currElem = stack.pop();
+            while (!tempStack.isEmpty() && tempStack.peek() > currElem) {
+                stack.push(tempStack.pop());
+            }
+            tempStack.push(currElem);
+        }
+
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+    }
+
+}
+
+
 public class StacksQuestions{
     public static void main(String[] args) {
 
         Parentheses parentheses = new Parentheses();
 
         System.out.println(parentheses.isBalancedParentheses("(()()()())"));
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(3);
+        stack.push(2);
+        stack.push(0);
+        stack.push(1);
+        stack.push(4);
+
+        StackSorting sorting = new StackSorting();
+
+        sorting.sortStack(stack);
+
+        for (int i = stack.size()-1; i >= 0; i--) {
+            System.out.println(stack.get(i));
+        }
 
     }
 }

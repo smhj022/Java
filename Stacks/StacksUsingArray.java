@@ -41,4 +41,6 @@ public class StacksUsingArray<T> {
         return stackList.remove(stackList.size()-1);
     }
 
+
+
 }
