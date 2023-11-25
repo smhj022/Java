@@ -2,6 +2,7 @@ package HashTables;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class HashTable {
@@ -83,5 +84,20 @@ public class HashTable {
             }
         }
         return allKeys;
+    }
+
+    public static boolean itemInCommon(int[] array1, int[] array2){
+
+        HashMap<Integer, Boolean> myHashMap = new HashMap<>();
+
+        for(int i : array1){
+            myHashMap.put(i,true);
+        }
+
+        for(int j : array2){
+            if (myHashMap.get(j) != null) return true;
+        }
+
+        return false;
     }
 }
