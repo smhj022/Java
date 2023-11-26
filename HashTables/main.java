@@ -14,6 +14,8 @@ public class main {
 
         myHashTable.printTable();
 
-        System.out.println(myHashTable.keys());
+        int[] nums = {2, 2,2};
+
+        System.out.println(myHashTable.findDuplicates(nums));
     }
 }

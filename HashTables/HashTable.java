@@ -1,9 +1,6 @@
 package HashTables;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class HashTable {
 
@@ -99,5 +96,27 @@ public class HashTable {
         }
 
         return false;
+    }
+
+
+    public List<Integer> findDuplicates(int[] nums){
+
+        HashMap<Integer, Integer> numCount = new HashMap<>();
+
+        List<Integer> dublicates = new ArrayList<>();
+
+        for(int num: nums){
+            if(numCount.get(num) != null){
+                int count = numCount.get(num);
+                if (count == 1){
+                    dublicates.add(num);
+                }
+                numCount.put(num, ++count);
+                System.out.println(numCount);
+            } else{
+                numCount.put(num, 1);
+            }
+        }
+        return dublicates;
     }
 }
