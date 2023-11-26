@@ -119,4 +119,22 @@ public class HashTable {
         }
         return dublicates;
     }
+
+    public Character firstNonRepeatingChar(String str){
+
+        char[] charArray = str.toCharArray();
+
+        HashMap<Character, Integer> charMap = new HashMap<>();
+
+        for(char ch1 : charArray){
+            charMap.put(ch1, charMap.getOrDefault(ch1, 0) + 1);
+        }
+
+        for (char ch2: charArray){
+            if(charMap.get(ch2) == 1) return ch2;
+        }
+
+        return null;
+    }
+
 }
