@@ -137,4 +137,37 @@ public class HashTable {
         return null;
     }
 
+    public static String sortString(String str) {
+        char[] chars = str.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }
+
+
+    // Method to group Anagrams of an Arrays
+    public List<List<String>> groupAnagrams(String[] strings){
+
+        Map<String, List<String>> sortStringHM = new HashMap<>();
+
+        for(String str: strings) {
+            List<String> strList = new ArrayList<>();
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String sortedString = new String(chars);
+            if (sortStringHM.get(sortedString) == null) {
+                strList.add(str);
+            } else {
+                strList = sortStringHM.get(sortString(str));
+                strList.add(str);
+            }
+            sortStringHM.put(sortedString, strList);
+        }
+
+        List<List<String>> list = new ArrayList<>();
+        for (List<String> values : sortStringHM.values()){
+            list.add(values);
+        }
+        return list;
+    }
+
 }

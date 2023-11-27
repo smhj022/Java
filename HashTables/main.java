@@ -1,6 +1,6 @@
 package HashTables;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class main {
     public static void main(String[] args) {
@@ -20,7 +20,10 @@ public class main {
 //
 //        System.out.println(myHashTable.findDuplicates(nums));
 
-        System.out.println(myHashTable.firstNonRepeatingChar("aabbcc"));
+//        System.out.println(myHashTable.firstNonRepeatingChar("aabbcc"));
+
+        System.out.println(myHashTable.groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
 
     }
+
 }
