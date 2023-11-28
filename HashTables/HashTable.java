@@ -170,4 +170,21 @@ public class HashTable {
         return list;
     }
 
+
+    // Method to find the indexes of values of an array have sum equal to target
+    public int[] twoSum(int[] myList, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < myList.length; i++) {
+            int complement = target - myList[i];
+
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+
+            map.put(myList[i], i);
+        }
+        return new int[]{}; // Return default if no pair found
+    }
+
 }
