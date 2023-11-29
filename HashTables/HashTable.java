@@ -187,4 +187,29 @@ public class HashTable {
         return new int[]{}; // Return default if no pair found
     }
 
+    public int[] subarraySum(int[] nums, int target) {
+        // Create a HashMap to store cumulative sum and index
+        Map<Integer, Integer> sumIndex = new HashMap<>();
+        // Initialize the HashMap with 0 sum and index -1
+        sumIndex.put(0, -1);
+        // Initialize the current sum to 0
+        int currentSum = 0;
+
+        // Iterate through the input array
+        for (int i = 0; i < nums.length; i++) {
+            // Calculate the cumulative sum
+            currentSum += nums[i];
+            // Check if the required subarray sum exists
+            if (sumIndex.containsKey(currentSum - target)) {
+                // Return the start and end indices of the subarray
+                return new int[]{sumIndex.get(currentSum - target) + 1, i};
+            }
+            // Store the current sum and its index in the HashMap
+            sumIndex.put(currentSum, i);
+        }
+
+        // Return an empty array if no subarray is found
+        return new int[]{};
+    }
+
 }
