@@ -212,4 +212,25 @@ public class HashTable {
         return new int[]{};
     }
 
+    // Added method to find the pairs form the integer list having sum equal to target
+    public List<int[]> findPairs(int[] arr1, int[] arr2, int target){
+
+        HashSet<Integer> arr1HS = new HashSet<>();
+
+        List<int[]> result = new ArrayList<>();
+
+
+        for (int num1 : arr1) {
+            arr1HS.add(num1);
+        }
+
+        for (int num2 : arr2) {
+            if(arr1HS.contains(target-num2)){
+                result.add(new int[]{target-num2, num2});
+            }
+        }
+
+        return result;
+    }
+
 }

@@ -8,11 +8,14 @@ public class main {
 
         HashTable myHashTable = new HashTable();
 
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {2, 4, 6, 8, 10};
+        int target = 7;
 
-        int[] nums1 = {1, 2, 3, 4, 5};
-        int target1 = 1;
-        System.out.println(Arrays.toString(myHashTable.subarraySum(nums1, target1)));
-
+        List<int[]> pairs = myHashTable.findPairs(arr1, arr2, target);
+        for (int[] pair : pairs) {
+            System.out.println(Arrays.toString(pair));
+        }
     }
 
 }
