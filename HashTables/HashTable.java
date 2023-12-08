@@ -7,22 +7,22 @@ public class HashTable {
     private int size = 7;
     private Node[] dataMap;
 
-    public HashTable(){
+    public HashTable() {
         dataMap = new Node[size];
     }
 
-    public class Node{
+    public class Node {
         private String key;
         private int value;
         private Node next;
 
-        public Node(String key, int value){
+        public Node(String key, int value) {
             this.key = key;
             this.value = value;
         }
     }
 
-    private int hash(String key){
+    private int hash(String key) {
         int hash = 0;
         char[] keyChars = key.toCharArray();
         for (int asciiValue : keyChars) {
@@ -43,27 +43,27 @@ public class HashTable {
         }
     }
 
-    public void set(String key, int value){
+    public void set(String key, int value) {
 
-         int index = hash(key);
-         Node newNode = new Node(key, value);
+        int index = hash(key);
+        Node newNode = new Node(key, value);
 
-         if (dataMap[index] == null){
-             dataMap[index] = newNode;
-         } else {
-             Node temp = dataMap[index];
-             while (temp.next != null){
-                 temp = temp.next;
-             }
-             temp.next = newNode;
-         }
+        if (dataMap[index] == null) {
+            dataMap[index] = newNode;
+        } else {
+            Node temp = dataMap[index];
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+        }
     }
 
-    public int get(String key){
+    public int get(String key) {
 
         int index = hash(key);
         Node temp = dataMap[index];
-        while (temp != null){
+        while (temp != null) {
             if (Objects.equals(temp.key, key)) return temp.value;
             temp = temp.next;
         }
@@ -83,15 +83,15 @@ public class HashTable {
         return allKeys;
     }
 
-    public static boolean itemInCommon(int[] array1, int[] array2){
+    public static boolean itemInCommon(int[] array1, int[] array2) {
 
         HashMap<Integer, Boolean> myHashMap = new HashMap<>();
 
-        for(int i : array1){
-            myHashMap.put(i,true);
+        for (int i : array1) {
+            myHashMap.put(i, true);
         }
 
-        for(int j : array2){
+        for (int j : array2) {
             if (myHashMap.get(j) != null) return true;
         }
 
@@ -99,39 +99,39 @@ public class HashTable {
     }
 
 
-    public List<Integer> findDuplicates(int[] nums){
+    public List<Integer> findDuplicates(int[] nums) {
 
         HashMap<Integer, Integer> numCount = new HashMap<>();
 
         List<Integer> dublicates = new ArrayList<>();
 
-        for(int num: nums){
-            if(numCount.get(num) != null){
+        for (int num : nums) {
+            if (numCount.get(num) != null) {
                 int count = numCount.get(num);
-                if (count == 1){
+                if (count == 1) {
                     dublicates.add(num);
                 }
                 numCount.put(num, ++count);
                 System.out.println(numCount);
-            } else{
+            } else {
                 numCount.put(num, 1);
             }
         }
         return dublicates;
     }
 
-    public Character firstNonRepeatingChar(String str){
+    public Character firstNonRepeatingChar(String str) {
 
         char[] charArray = str.toCharArray();
 
         HashMap<Character, Integer> charMap = new HashMap<>();
 
-        for(char ch1 : charArray){
+        for (char ch1 : charArray) {
             charMap.put(ch1, charMap.getOrDefault(ch1, 0) + 1);
         }
 
-        for (char ch2: charArray){
-            if(charMap.get(ch2) == 1) return ch2;
+        for (char ch2 : charArray) {
+            if (charMap.get(ch2) == 1) return ch2;
         }
 
         return null;
@@ -145,11 +145,11 @@ public class HashTable {
 
 
     // Method to group Anagrams of an Arrays
-    public List<List<String>> groupAnagrams(String[] strings){
+    public List<List<String>> groupAnagrams(String[] strings) {
 
         Map<String, List<String>> sortStringHM = new HashMap<>();
 
-        for(String str: strings) {
+        for (String str : strings) {
             List<String> strList = new ArrayList<>();
             char[] chars = str.toCharArray();
             Arrays.sort(chars);
@@ -164,7 +164,7 @@ public class HashTable {
         }
 
         List<List<String>> list = new ArrayList<>();
-        for (List<String> values : sortStringHM.values()){
+        for (List<String> values : sortStringHM.values()) {
             list.add(values);
         }
         return list;
@@ -213,7 +213,7 @@ public class HashTable {
     }
 
     // Added method to find the pairs form the integer list having sum equal to target
-    public List<int[]> findPairs(int[] arr1, int[] arr2, int target){
+    public List<int[]> findPairs(int[] arr1, int[] arr2, int target) {
 
         HashSet<Integer> arr1HS = new HashSet<>();
 
@@ -225,12 +225,56 @@ public class HashTable {
         }
 
         for (int num2 : arr2) {
-            if(arr1HS.contains(target-num2)){
-                result.add(new int[]{target-num2, num2});
+            if (arr1HS.contains(target - num2)) {
+                result.add(new int[]{target - num2, num2});
             }
         }
 
         return result;
     }
 
+   /* Set: Longest Consecutive Sequence ( ** Interview Question)
+    Given an unsorted array of integers, write a function that finds the length of the  longestConsecutiveSequence
+    (i.e., a sequence of integers in which each element is one greater than the previous element).
+
+    Use sets to optimize the runtime of your solution.
+            Input: An unsorted array of integers, nums.
+            Output: An integer representing the length of the longest consecutive sequence in nums.
+
+    Input: int[] nums = [100, 4, 200, 1, 3, 2]
+    Output: 4
+    Explanation: The longest consecutive sequence in the input array is [4, 3, 2, 1], and its length is 4.
+    */
+
+
+    public int longestConsecutiveSequence(int[] nums) {
+
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        Set<Integer> numSet = new HashSet<>();
+
+        for (int num : nums) {
+            numSet.add(num);
+        }
+
+        int longestStreak = 0;
+
+
+        for (int num : numSet) {
+            if (!numSet.contains(num - 1)) {
+                int currentNum = num;
+                int currentStreak = 1;
+                while (numSet.contains(currentNum + 1)) {
+                    currentNum++;
+                    currentStreak++;
+                }
+                if (currentStreak > longestStreak) {
+                    longestStreak = currentStreak;
+                }
+            }
+        }
+        return longestStreak;
+    }
 }
