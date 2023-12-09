@@ -27,4 +27,16 @@ public class Graph {
     public void printGraph(){
         System.out.println(adjList);
     }
+
+    public boolean removeEdge(String vertex1, String vertex2){
+
+        if (adjList.get(vertex1) == null && adjList.get(vertex2) == null){
+            return false;
+        }
+
+        adjList.get(vertex1).remove(vertex2);
+        adjList.get(vertex2).remove(vertex1);
+
+        return true;
+    }
 }
