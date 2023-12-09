@@ -2,6 +2,7 @@ package Graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Graph {
     private HashMap<String, ArrayList<String>> adjList = new HashMap<>();
@@ -37,6 +38,20 @@ public class Graph {
         adjList.get(vertex1).remove(vertex2);
         adjList.get(vertex2).remove(vertex1);
 
+        return true;
+    }
+
+    public boolean removeVertex(String vertex){
+
+        if (adjList.get(vertex) == null){
+            return false;
+        }
+
+        for (String otherVertex: adjList.get(vertex)) {
+            adjList.get(otherVertex).remove(vertex);
+        }
+
+        adjList.remove(vertex);
         return true;
     }
 }
