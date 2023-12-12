@@ -24,7 +24,7 @@ public class Heap {
     }
 
     public int parent(int index){
-        return (index -1)/2;
+        return (index - 1) /2;
     }
 
     public void swap(int index1, int index2){
@@ -32,4 +32,16 @@ public class Heap {
         heap.set(index1, heap.get(index2));
         heap.set(index2, temp);
     }
+
+    public void insert(int value){
+
+        heap.add(value);
+        int current = heap.size() - 1;
+
+        while(heap.get(parent(current)) < value && current > 0){
+            swap(parent(current), current);
+            current = parent(current);
+        }
+    }
 }
+
