@@ -18,11 +18,8 @@ public class main {
         System.out.println(myHeap.getHeap());
 
         myHeap.remove();
-
         System.out.println(myHeap.getHeap());
-
         myHeap.remove();
-
         System.out.println(myHeap.getHeap());
 
     }
