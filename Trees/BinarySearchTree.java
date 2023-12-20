@@ -190,4 +190,18 @@ public class BinarySearchTree {
     public ArrayList<Integer> DFSPreOrder(){
         return DFSPreOrder(root, new ArrayList<Integer>());
     }
+
+    private ArrayList<Integer> DFSPostOrder(Node node, ArrayList<Integer> results){
+        if (node != null) {
+
+            DFSPostOrder(node.left, results);
+            DFSPostOrder(node.right, results);
+            results.add(node.value);
+        }
+        return results;
+    }
+
+    public ArrayList<Integer> DFSPostOrder(){
+        return DFSPostOrder(root, new ArrayList<Integer>());
+    }
  }
