@@ -1,5 +1,9 @@
 package Trees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
     Node root;
 
@@ -146,5 +150,28 @@ public class BinarySearchTree {
 
     public void deleteNode(int value){
         deleteNode(root, value);
+    }
+
+
+
+    // Tree Traversal using Breadth First search
+    public ArrayList<Integer> BFS(){
+
+        Node currentNode = root;
+        Queue<Node> queue = new LinkedList<>();
+
+        ArrayList<Integer> results= new ArrayList<>();
+
+        queue.add(currentNode);
+
+        while(!queue.isEmpty()){
+
+            currentNode = queue.remove();
+            if (currentNode.left != null) queue.add(currentNode.left);
+            if (currentNode.right != null) queue.add(currentNode.right);
+
+            results.add(currentNode.value);
+        }
+        return results;
     }
 }
