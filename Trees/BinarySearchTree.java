@@ -174,4 +174,20 @@ public class BinarySearchTree {
         }
         return results;
     }
-}
+
+    // Tree traversal Depth First Search
+
+    //PreOrder
+    private ArrayList<Integer> DFSPreOrder(Node node, ArrayList<Integer> results){
+        if (node != null) {
+            results.add(node.value);
+            DFSPreOrder(node.left, results);
+            DFSPreOrder(node.right, results);
+        }
+        return results;
+    }
+
+    public ArrayList<Integer> DFSPreOrder(){
+        return DFSPreOrder(root, new ArrayList<Integer>());
+    }
+ }
