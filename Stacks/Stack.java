@@ -2,7 +2,7 @@ package Stacks;
 
 
 // Stacks are the linear data structure that follows a particular order in
-// which operations are performed. -> LastInFirstOut
+// which operations are performed. -> FirstInFirstOut
 
 public class Stack {
 
