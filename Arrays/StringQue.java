@@ -1,17 +1,13 @@
 package Arrays;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.*;
 
 public class StringQue {
 
     public static void main(String[] args) {
-        System.out.println(reverseString("suyash"));
-
-        int[] arr1 = {1,3,5,7,11,13,15 };
-        int[] arr2 = {2,4,6,8,9,10};
-        System.out.println(Arrays.toString(mergeTwoSortedArray(arr1, arr2)));
+//        System.out.println(reverseString("suyash"));
+        int[] arr1 = {1,2};
+        rotate(arr1, 4);
     }
 
 
@@ -50,25 +46,20 @@ public class StringQue {
         int r1 = 0;
 
         while (p1 < n1 && p2 < n2){
-
             if (arr1[p1] < arr2[p2]){
                 result[r1++] = arr1[p1++];
             } else {
                 result[r1++] = arr2[p2++];
             }
         }
-
-        System.out.println(p1 + " " + p2 + " " + r1);
-
+        // check if elem is available in arr1
         if(p1 < n1){
-
             while(p1 < n1){
                 result[r1++] = arr1[p1++];
             }
         }
-
+        // check if elem is available in arr2
         if(p2 < n2){
-
             while(p2 < n2){
                 result[r1++] = arr2[p2++];
             }
@@ -76,4 +67,26 @@ public class StringQue {
 
         return result;
     }
+
+    public static void rotate(int[] nums, int k) {
+
+        k = k % nums.length;
+
+        reverse(nums, 0, nums.length-1);
+        reverse(nums, 0, k-1);
+        reverse(nums, k, nums.length-1);
+        System.out.println(Arrays.toString(nums));
+    }
+
+    public static void reverse(int[] arr, int start, int end){
+
+        while(end >= start){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            end--;
+            start++;
+        }
+    }
 }
+
