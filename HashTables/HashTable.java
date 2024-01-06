@@ -4,16 +4,31 @@ import java.util.*;
 
 public class HashTable {
 
+    // default size of hashTable
     private int size = 7;
+
+    // Variable of Node type
     private Node[] dataMap;
 
-    public HashTable() {
+    // Constructor with size as a parameter
+    public HashTable(int size) {
         dataMap = new Node[size];
     }
 
+    // no parameter constructor
+    public HashTable() { dataMap = new Node[size];}
+
+
+    // Node class
     public class Node {
+
+        // Key and value pair
         private String key;
         private int value;
+
+        // to handle collision ( occurs when two pieces of data in a hash
+        //                        table share the same hash value.)
+        // this is called separate chaining -> one data point to another (linked list
         private Node next;
 
         public Node(String key, int value) {
@@ -22,6 +37,7 @@ public class HashTable {
         }
     }
 
+    // function to generate the hash
     private int hash(String key) {
         int hash = 0;
         char[] keyChars = key.toCharArray();
@@ -31,8 +47,8 @@ public class HashTable {
         return hash;
     }
 
+    // function to print the hash table
     public void printTable() {
-
         for (int i = 0; i < dataMap.length; i++) {
             System.out.println(i + ":");
             Node temp = dataMap[i];
@@ -43,11 +59,14 @@ public class HashTable {
         }
     }
 
+    // function to set the key value pair inside a hashmap
     public void set(String key, int value) {
 
+        // generating hash for key
         int index = hash(key);
         Node newNode = new Node(key, value);
 
+        // Checking if the index has already available pair or not
         if (dataMap[index] == null) {
             dataMap[index] = newNode;
         } else {
@@ -59,6 +78,7 @@ public class HashTable {
         }
     }
 
+    // function to get the value by passing the key.
     public int get(String key) {
 
         int index = hash(key);
@@ -70,6 +90,8 @@ public class HashTable {
         return -1;
     }
 
+
+    // function to print out all the keys of a Hash table.
     public ArrayList<String> keys() {
         ArrayList<String> allKeys = new ArrayList<>();
 
@@ -82,6 +104,7 @@ public class HashTable {
         }
         return allKeys;
     }
+
 
     public static boolean itemInCommon(int[] array1, int[] array2) {
 
