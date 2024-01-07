@@ -300,4 +300,18 @@ public class HashTable {
         }
         return longestStreak;
     }
+
+    public int firstRecurringInteger(int[] nums){
+
+        HashSet<Integer> myHS = new HashSet<>();
+
+        for (int num : nums) {
+            if (myHS.contains(num)) {
+                return num;
+            }
+            myHS.add(num);
+        }
+
+        return -1;
+    }
 }
