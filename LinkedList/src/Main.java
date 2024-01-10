@@ -4,17 +4,13 @@ package LinkedList.src;// Press Shift twice to open the Search Everywhere dialog
 import LinkedList.src.LinkedList;
 public class Main {
     public static void main(String[] args) {
-        LinkedList LL = new LinkedList(-9);
+        LinkedList LL = new LinkedList(1);
         LL.appendElem(3);
-//        LL.appendElem(6);
+        LL.appendElem(4);
+        LL.appendElem(5);
+        LL.appendElem(6);
 
-        LinkedList LL2 = new LinkedList(5);
-        LL2.appendElem(7);
-//        LL2.appendElem();
-//        LL.appendElem(4);
-//        LL.appendElem(5);
-//        LL.appendElem(6)
-
-        LL.mergeLinkedList(LL, LL2);
+        LL.reverse();
+        LL.printList();
     }
 }

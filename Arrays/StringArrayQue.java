@@ -5,9 +5,8 @@ import java.util.Arrays;
 public class StringArrayQue {
 
     public static void main(String[] args) {
-//        System.out.println(reverseString("suyash"));
-        int[] arr1 = {1,2};
-        rotate(arr1, 4);
+
+        System.out.println(strStr("mississippi", "issip"));
     }
 
 
@@ -117,6 +116,60 @@ public class StringArrayQue {
         }
         return maxSum;
     }
+
+    // Leetcode question 28.
+
+    //    28. Find the Index of the First Occurrence in a String
+    //    Solved
+    //            Easy
+    //    Topics
+    //            Companies
+    //    Given two strings needle and haystack, return the index of the first
+    //    occurrence of needle in haystack, or -1 if needle is not part of
+    //    haystack.
+    //
+    //    Example 1:
+    //
+    //    Input: haystack = "sadbutsad", needle = "sad"
+    //    Output: 0
+    //    Explanation: "sad" occurs at index 0 and 6.
+    //    The first occurrence is at index 0, so we return 0.
+    //    Example 2:
+    //
+    //    Input: haystack = "leetcode", needle = "leeto"
+    //    Output: -1
+    //    Explanation: "leeto" did not occur in "leetcode", so we return -1.
+    //
+    //
+    //    Constraints:
+    //
+    //            1 <= haystack.length, needle.length <= 104
+    //    haystack and needle consist of only lowercase English characters.
+
+    public static int strStr(String haystack, String needle) {
+
+        char[] haystackArr = haystack.toCharArray();
+        char[] needleArr = needle.toCharArray();
+
+        int count = 0;
+
+        for(int i = 0; i < haystackArr.length; i++){
+
+            if( haystackArr[i] == needleArr[count]){
+                count++;
+                System.out.println(count + " " + haystackArr[i]);
+                if(count == needleArr.length){
+                    return i - needleArr.length + 1;
+                }
+            } else {
+                i = i - count;
+                count = 0;
+            }
+        }
+        return -1;
+
+    }
 }
+
 
 
