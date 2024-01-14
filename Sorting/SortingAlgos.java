@@ -2,6 +2,7 @@ package Sorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SortingAlgos {
     public static int[] bubbleSort(int[] arr){
@@ -53,5 +54,56 @@ public class SortingAlgos {
             }
         }
         return arr;
+    }
+
+    // Merge sort
+    public static int[] mergeSort(int [] arr){
+
+
+        if(arr.length == 1){
+            return arr;
+        }
+
+        int midIndex = arr.length/2;
+        int[] left = mergeSort(Arrays.copyOfRange(arr, 0, midIndex));
+        int[] right = mergeSort(Arrays.copyOfRange(arr, midIndex, arr.length));
+
+        return merge(left, right);
+    }
+
+    public static int[] merge(int[] arr1, int[] arr2){
+
+        int arr1Len = arr1.length;
+        int arr2Len = arr2.length;
+
+        int index = 0;
+        int i = 0;
+        int j = 0;
+
+
+        int[] combinedArr = new int[arr1Len + arr2Len];
+
+        while(arr1Len != 0 && arr2Len != 0){
+            if(arr1[i] < arr2[j]){
+                combinedArr[index++] = arr1[i++];
+                arr1Len--;
+            }
+            else {
+                combinedArr[index++] = arr2[j++];
+                arr2Len--;
+            }
+        }
+
+        while(arr1Len != 0 ){
+            combinedArr[index++] = arr1[i++];
+            arr1Len--;
+        }
+
+        while(arr2Len != 0){
+            combinedArr[index++] = arr2[j++];
+            arr2Len--;
+        }
+
+        return combinedArr;
     }
 }
