@@ -1,5 +1,7 @@
 package LinkedList.src;
 
+import java.security.spec.RSAOtherPrimeInfo;
+import java.sql.SQLOutput;
 import java.util.HashSet;
 import java.util.Set;
 import java.lang.Math;
@@ -497,7 +499,7 @@ public class LinkedList {
         Node p2 = list2.head;
         Node p3 = dummy;
 
-//        System.out.println("iteration 1 " + p1.value + " " + p2.value + " " + p3.value);
+        System.out.println("iteration 1 " + p1.value + " " + p2.value + " " + p3.value);
 
         while (p1!=null && p2!=null){
 

@@ -106,4 +106,36 @@ public class SortingAlgos {
 
         return combinedArr;
     }
+
+    public static void swap(int[] arr, int firstIndex, int secondIndex){
+        int temp = arr[firstIndex];
+        arr[firstIndex] = arr[secondIndex];
+        arr[secondIndex] = temp;
+    }
+
+
+    public static int pivot(int[] arr, int pivotIndex, int endIndex){
+
+        int swapIndex = pivotIndex;
+
+        for(int i = pivotIndex+1; i <= endIndex; i++){
+
+            if(arr[i] < arr[pivotIndex]){
+                swapIndex++;
+                swap(arr, i, swapIndex);
+            }
+        }
+        swap(arr, swapIndex, pivotIndex);
+
+        return swapIndex;
+    }
+
+    public static void quickSort(int arr[], int left, int right){
+
+        if(left < right) {
+            int pivotIndex = pivot(arr, left, right);
+            quickSort(arr, left, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, right);
+        }
+    }
 }
