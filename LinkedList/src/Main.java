@@ -13,7 +13,7 @@ public class Main {
         LL.appendElem(1);
 //        LL.appendElem(-3);
 
-        LL.bubbleSort();
+//        LL.bubbleSort();
 
         LL.printList();
 

@@ -1,12 +1,16 @@
 package Arrays;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class StringArrayQue {
 
     public static void main(String[] args) {
 
-        System.out.println(strStr("mississippi", "issip"));
+        int[] arr = {2,2,1,1,1,2,2,1,1,1,1,1,33,3,3,3,3,33,3,3,3,3,3,3,3,3,3,3,3,3};
+        System.out.println(majorityElement(arr));
     }
 
 
@@ -168,6 +172,49 @@ public class StringArrayQue {
         }
         return -1;
 
+    }
+
+    public static int singleNumber(int[] nums) {
+
+        HashSet<Integer> singleNumberHS = new HashSet<>();
+
+        for(int num : nums){
+            if(singleNumberHS.contains(num)){
+                singleNumberHS.remove(num);
+            } else {
+                singleNumberHS.add(num);
+            }
+
+        }
+
+        int res=0;
+        for (int val : singleNumberHS) {
+            res = val;
+            break;
+        }
+        return res;
+
+    }
+
+    public static int majorityElement(int[] nums) {
+
+        HashMap<Integer, Integer> countHM = new HashMap<>();
+
+        int majorityElem=nums[0];
+        int majorityCount=0;
+
+        for (int num : nums){
+            countHM.merge(num, 1, Integer::sum);
+        }
+
+        for(Map.Entry<Integer, Integer> entry : countHM.entrySet()) {
+
+            if(majorityCount < entry.getValue()){
+                majorityElem = entry.getKey();
+                majorityCount = entry.getValue();
+            }
+        }
+        return majorityElem;
     }
 }
 
