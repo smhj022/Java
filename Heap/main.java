@@ -4,23 +4,30 @@ public class main {
 
     public static void main(String[] args) {
 
-        Heap myHeap = new Heap();
+//        Heap myHeap = new Heap();
+//
+//
+//        myHeap.insert(95);
+//        myHeap.insert(75);
+//        myHeap.insert(80);
+//        myHeap.insert(55);
+//        myHeap.insert(60);
+//        myHeap.insert(50);
+//        myHeap.insert(65);
+//
+//        System.out.println(myHeap.getHeap());
+//
+//        myHeap.remove();
+//        System.out.println(myHeap.getHeap());
+//        myHeap.remove();
+//        System.out.println(myHeap.getHeap());
 
 
-        myHeap.insert(95);
-        myHeap.insert(75);
-        myHeap.insert(80);
-        myHeap.insert(55);
-        myHeap.insert(60);
-        myHeap.insert(50);
-        myHeap.insert(65);
+        HeapQuestions heapQue = new HeapQuestions();
 
-        System.out.println(myHeap.getHeap());
+        int[] nums = {3,2,3,1,2,4,5,5,6};
 
-        myHeap.remove();
-        System.out.println(myHeap.getHeap());
-        myHeap.remove();
-        System.out.println(myHeap.getHeap());
+        System.out.println(heapQue.findKthLargest(nums, 4));
 
     }
 }
