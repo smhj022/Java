@@ -27,9 +27,9 @@ public class main {
 
         HeapQuestions heapQue = new HeapQuestions();
 
-        int[] nums = {6,5,3,2,8,10,7,9};
+        int[] nums = {5,6,7,8,9};
 
-        heapQue.sortLKSorted(nums, 3);
+        System.out.println(heapQue.kClosedValues(nums, 7, 3));
 
     }
 }

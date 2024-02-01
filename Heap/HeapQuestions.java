@@ -1,7 +1,6 @@
 package Heap;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class HeapQuestions {
 
@@ -66,5 +65,29 @@ public class HeapQuestions {
             nums[irr++] = queue.poll();
         }
         System.out.println(Arrays.toString(nums));
+    }
+
+
+    public List<Integer> kClosedValues(int[] nums, int x, int k){
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+        for (int num : nums) {
+            if (k > 0) {
+                queue.add(num);
+                k--;
+            } else if (Math.abs(queue.peek() - x) > Math.abs(num - x)) {
+                queue.poll();
+                queue.add(num);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+
+        while (!queue.isEmpty()){
+            result.add(queue.poll());
+        }
+
+        return result;
     }
 }
