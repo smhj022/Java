@@ -1,5 +1,7 @@
 package Heap;
 
+import java.util.Arrays;
+
 public class main {
 
     public static void main(String[] args) {
@@ -25,9 +27,9 @@ public class main {
 
         HeapQuestions heapQue = new HeapQuestions();
 
-        int[] nums = {3,2,3,1,2,4,5,5,6};
+        int[] nums = {6,5,3,2,8,10,7,9};
 
-        System.out.println(heapQue.findKthLargest(nums, 4));
+        heapQue.sortLKSorted(nums, 3);
 
     }
 }
