@@ -4,6 +4,17 @@ import java.util.*;
 
 public class HeapQuestions {
 
+    class Pair implements Comparable<Pair>{
+        int num, count;
+        public Pair(int num, int count) {
+            this.num = num;
+            this.count = count;
+        }
+        public int compareTo(Pair b){
+            return this.count-b.count;
+        }
+    }
+
 
     // Kth Largest Element in an Array
     public int findKthLargest(int[] nums, int k) {
@@ -22,7 +33,7 @@ public class HeapQuestions {
         return myQueue.peek();
     }
 
-    // Find K largest element of an array
+    // Find K no. largest element of an array
     public int[] KLargest(int[] nums, int k){
 
         if(nums.length < k) return nums;
@@ -86,6 +97,38 @@ public class HeapQuestions {
 
         while (!queue.isEmpty()){
             result.add(queue.poll());
+        }
+
+        return result;
+    }
+
+    public int[] topKFrequentNumber(int[] nums, int k){
+
+        HashMap<Integer, Integer> freqHM = new HashMap<>();
+        for(int num: nums){
+            freqHM.put(num, freqHM.getOrDefault(num, 0)+1);
+        }
+
+        PriorityQueue<Pair> minheap = new PriorityQueue<>();
+        Set<Integer> keys = freqHM.keySet();
+
+        for(int key: keys){
+
+            if(minheap.size() < k){
+                minheap.add(new Pair(key, freqHM.get(key)));
+            } else if (minheap.peek().count < freqHM.get(key)) {
+                minheap.poll();
+                minheap.add(new Pair(key, freqHM.get(key)));
+            }
+        }
+
+        System.out.println(freqHM);
+
+        int[] result = new int[k];
+        int irr = k - 1;
+
+        while(irr >= 0){
+            result[irr--] = minheap.poll().num;
         }
 
         return result;
