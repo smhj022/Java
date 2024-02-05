@@ -1,6 +1,8 @@
 package Heap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class main {
 
@@ -27,9 +29,16 @@ public class main {
 
         HeapQuestions heapQue = new HeapQuestions();
 
-        int[] nums = {1,1,1,2,2,2,2,3,3,3,3,3,4,4,5,5,5,5,5,5,5,5,5,5};
 
-        System.out.println(Arrays.toString(heapQue.topKFrequentNumber(nums, 2)));
+        List<List<Integer>> cordPair = new ArrayList<>();
 
+        cordPair.add(Arrays.asList(1,2));
+        cordPair.add(Arrays.asList(1,1));
+        cordPair.add(Arrays.asList(-1,4));
+        cordPair.add(Arrays.asList(4,6));
+        cordPair.add(Arrays.asList(0,0));
+        cordPair.add(Arrays.asList(0,-1));
+
+        System.out.println(heapQue.KSmallestDistFromOrigin(cordPair, 2));
     }
 }
