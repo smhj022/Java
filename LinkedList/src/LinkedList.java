@@ -8,7 +8,7 @@ import java.lang.Math;
 public class LinkedList {
 
     // Variable head of Node type
-    private Node head;
+    public Node head;
 
     // Variable tail of Node type
     private Node tail;
@@ -24,6 +24,9 @@ public class LinkedList {
         //Node constructor
         Node(int value) {
             this.value = value;
+        }
+
+        public Node() {
         }
     }
 
@@ -544,5 +547,31 @@ public class LinkedList {
     public void getLength() {
         System.out.println("Length: " + length);
     }
+
+
+    // separate  odd even linked list
+    public Node oddEvenList(Node head){
+
+        if(head == null) return head
+
+        Node p1 = head;
+        Node p2 = head.next;
+        Node dummyNode = new Node(0);
+
+        dummyNode.next = p2;
+
+        while(p2 != null && p2.next != null){
+            p1.next = p1.next.next;
+            p2.next = p2.next.next;
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        p1.next = dummyNode.next;
+
+        printList();
+
+        return head;
+    };
 
 }
