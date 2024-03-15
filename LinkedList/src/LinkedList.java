@@ -552,7 +552,7 @@ public class LinkedList {
     // separate  odd even linked list
     public Node oddEvenList(Node head){
 
-        if(head == null) return head
+        if(head == null) return null;
 
         Node p1 = head;
         Node p2 = head.next;
