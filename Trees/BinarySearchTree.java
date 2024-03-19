@@ -308,4 +308,27 @@ public class BinarySearchTree {
         }
         return results;
     }
+
+    //maximum height of binary tree
+
+    public int heightBT(Node node){
+        if(node == null) return 0;
+        return Math.max(heightBT(node.left), heightBT(node.right)) + 1;
+    }
+
+
+    // Size of Binary Tree (Number of nodes)
+    public int sizeBT(Node node){
+        if(node == null) return 0;
+        return sizeBT(node.left) + sizeBT(node.right) + 1;
+    }
+
+    // Max value in the binary tree
+
+    public int maxNodeValue(Node node){
+        if (node == null) return Integer.MIN_VALUE;
+        return Math.max(node.value, Math.max(maxNodeValue(node.left), maxNodeValue(node.right)));
+    }
+
+
 }

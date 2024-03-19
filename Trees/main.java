@@ -17,9 +17,9 @@ public class main {
         myBST.insert(8);
         myBST.insert(7);
 
-        System.out.println(myBST.root.left.value);
+//        System.out.println(myBST.root.left.value);
 
-        System.out.println(myBST.leftSubTreeTravesal(myBST.root, new ArrayList<Integer>()));
+        System.out.println(myBST.maxNodeValue(myBST.root));
 
     }
 }
