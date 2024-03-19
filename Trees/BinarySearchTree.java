@@ -1,10 +1,7 @@
 package Trees;
 
 import javax.swing.tree.TreeNode;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinarySearchTree {
     Node root;
@@ -192,8 +189,10 @@ public class BinarySearchTree {
         Queue<Node> queue = new LinkedList<>();
 
         ArrayList<Integer> results = new ArrayList<>();
+        ArrayList<Integer> leftView = new ArrayList<>();
 
         queue.add(currentNode);
+
 
         while (!queue.isEmpty()) {
 
@@ -277,11 +276,30 @@ public class BinarySearchTree {
         return arr;
     }
 
+    //maximum height of binary tree
+    public int heightBT(Node node){
+        if(node == null) return 0;
+        return Math.max(heightBT(node.left), heightBT(node.right)) + 1;
+    }
+
+
+    // Size of Binary Tree (Number of nodes)
+    public int sizeBT(Node node){
+        if(node == null) return 0;
+        return sizeBT(node.left) + sizeBT(node.right) + 1;
+    }
+
+    // Max value in the binary tree
+    public int maxNodeValue(Node node){
+        if (node == null) return Integer.MIN_VALUE;
+        return Math.max(node.value, Math.max(maxNodeValue(node.left), maxNodeValue(node.right)));
+    }
+
     // Questions Based on Breath First Search
 
     // Question 1: Right side view of a BST.
 
-    //Need to find the last element form all the level of the Tree
+    //Need to find the last element form all the level of the Tree using Queue
     public List<Integer> rightSideView(Node root) {
 
         Queue<Node> queue = new LinkedList<>();
@@ -309,26 +327,22 @@ public class BinarySearchTree {
         return results;
     }
 
-    //maximum height of binary tree
+    // find the left view of Binary search Tree. using HashMap
 
-    public int heightBT(Node node){
-        if(node == null) return 0;
-        return Math.max(heightBT(node.left), heightBT(node.right)) + 1;
+    public List<Integer> leftSideView(Node node){
+
+        List<Integer> result = new ArrayList<>(4);
+        if (node == null) return result;
+        leftViewUtil(result, root, 0);
+        return result;
     }
 
-
-    // Size of Binary Tree (Number of nodes)
-    public int sizeBT(Node node){
-        if(node == null) return 0;
-        return sizeBT(node.left) + sizeBT(node.right) + 1;
+    public void leftViewUtil(List<Integer> res, Node node, int level){
+        if(node == null) return;
+        if(res.size() == level){
+            res.add(level, node.value);
+        }
+        leftViewUtil(res, node.left, level+1);
+        leftViewUtil(res, node.right, level+1);
     }
-
-    // Max value in the binary tree
-
-    public int maxNodeValue(Node node){
-        if (node == null) return Integer.MIN_VALUE;
-        return Math.max(node.value, Math.max(maxNodeValue(node.left), maxNodeValue(node.right)));
-    }
-
-
 }
