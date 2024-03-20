@@ -1,5 +1,7 @@
 package Trees;
 
+import Heap.HeapQuestions;
+
 import javax.swing.tree.TreeNode;
 import java.util.*;
 
@@ -189,10 +191,8 @@ public class BinarySearchTree {
         Queue<Node> queue = new LinkedList<>();
 
         ArrayList<Integer> results = new ArrayList<>();
-        ArrayList<Integer> leftView = new ArrayList<>();
 
         queue.add(currentNode);
-
 
         while (!queue.isEmpty()) {
 
@@ -328,7 +328,6 @@ public class BinarySearchTree {
     }
 
     // find the left view of Binary search Tree. using HashMap
-
     public List<Integer> leftSideView(Node node){
 
         List<Integer> result = new ArrayList<>(4);
@@ -344,5 +343,80 @@ public class BinarySearchTree {
         }
         leftViewUtil(res, node.left, level+1);
         leftViewUtil(res, node.right, level+1);
+    }
+
+    class Pair{
+        int hd;
+        Node node;
+
+        public Pair(int hd, Node node) {
+            this.hd = hd;
+            this.node = node;
+        }
+    }
+
+    // Top View of Tree Map
+    public List<Integer> topView(){
+        Queue<Pair> queue = new LinkedList<>();
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        queue.add(new Pair(0, root));
+
+        while (!queue.isEmpty()) {
+
+            Pair currentPair = queue.poll();
+
+            if(!map.containsKey(currentPair.hd)){
+                map.put(currentPair.hd, currentPair.node.value);
+            }
+
+            if (currentPair.node.left != null) {
+                queue.add(new Pair(currentPair.hd-1, currentPair.node.left));
+            }
+
+            if (currentPair.node.right != null) {
+                queue.add(new Pair(currentPair.hd+1, currentPair.node.right));
+            }
+        }
+
+        List<Integer> topView = new ArrayList<>();
+
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            topView.add(entry.getValue());
+        }
+
+        return topView;
+    }
+
+
+    // Bottom view of tree map
+    public List<Integer> bottomView() {
+        Queue<Pair> queue = new LinkedList<>();
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        queue.add(new Pair(0, root));
+
+        while (!queue.isEmpty()) {
+
+            Pair currentPair = queue.poll();
+
+            map.put(currentPair.hd, currentPair.node.value);
+
+            if (currentPair.node.left != null) {
+                queue.add(new Pair(currentPair.hd - 1, currentPair.node.left));
+            }
+
+            if (currentPair.node.right != null) {
+                queue.add(new Pair(currentPair.hd + 1, currentPair.node.right));
+            }
+        }
+
+        List<Integer> topView = new ArrayList<>();
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            topView.add(entry.getValue());
+        }
+
+        return topView;
     }
 }

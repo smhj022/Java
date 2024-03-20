@@ -20,8 +20,8 @@ public class main {
 //        System.out.println(myBST.root.left.value);
 
 
-        System.out.println(myBST.rightSideView(myBST.root));
-        System.out.println(myBST.leftSideView(myBST.root));
+        System.out.println(myBST.BFS());
+        System.out.println(myBST.topView());
 
 
     }
