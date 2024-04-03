@@ -8,20 +8,20 @@ public class main {
 
         BinarySearchTree myBST = new BinarySearchTree();
 
-        myBST.insert(6);
-        myBST.insert(9);
         myBST.insert(3);
-        myBST.insert(10);
-        myBST.insert(4);
         myBST.insert(5);
+        myBST.insert(2);
+        myBST.insert(1);
+        myBST.insert(4);
+        myBST.insert(6);
         myBST.insert(8);
         myBST.insert(7);
 
 //        System.out.println(myBST.root.left.value);
-
-
         System.out.println(myBST.BFS());
-        System.out.println(myBST.topView());
+        myBST.convertToDLL(myBST.root);
+
+        myBST.printDLL();
 
 
     }

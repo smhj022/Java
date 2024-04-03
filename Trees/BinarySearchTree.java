@@ -8,7 +8,7 @@ import java.util.*;
 public class BinarySearchTree {
     Node root;
 
-    class Node {
+    public class Node {
 
         int value;
         Node left;
@@ -184,7 +184,7 @@ public class BinarySearchTree {
     }
 
 
-    // Tree Traversal using Breadth First search
+    // Tree Traversal using Breadth First search (Level Order Traversal)
     public ArrayList<Integer> BFS() {
 
         Node currentNode = root;
@@ -330,7 +330,7 @@ public class BinarySearchTree {
     // find the left view of Binary search Tree. using HashMap
     public List<Integer> leftSideView(Node node){
 
-        List<Integer> result = new ArrayList<>(4);
+        List<Integer> result = new ArrayList<>();
         if (node == null) return result;
         leftViewUtil(result, root, 0);
         return result;
@@ -346,6 +346,8 @@ public class BinarySearchTree {
     }
 
     class Pair{
+
+        // horizontal distance of Node from the center
         int hd;
         Node node;
 
@@ -358,14 +360,18 @@ public class BinarySearchTree {
     // Top View of Tree Map
     public List<Integer> topView(){
         Queue<Pair> queue = new LinkedList<>();
+
+        // Using tree Map, because it is already sorted
         Map<Integer, Integer> map = new TreeMap<>();
 
         queue.add(new Pair(0, root));
 
         while (!queue.isEmpty()) {
 
+            // Remove Pair from the queue
             Pair currentPair = queue.poll();
 
+            // checking if the pair is already in the map or not
             if(!map.containsKey(currentPair.hd)){
                 map.put(currentPair.hd, currentPair.node.value);
             }
@@ -398,8 +404,10 @@ public class BinarySearchTree {
 
         while (!queue.isEmpty()) {
 
+            // Remove pair from the queue
             Pair currentPair = queue.poll();
 
+            // Update the value of key i.e. hd
             map.put(currentPair.hd, currentPair.node.value);
 
             if (currentPair.node.left != null) {
@@ -418,5 +426,35 @@ public class BinarySearchTree {
         }
 
         return topView;
+    }
+
+    // flatten a Binary tree ( In Order traversal) without extra space
+
+    Node prev = null;
+    Node head = null;
+
+    public void convertToDLL(Node root) {
+
+        if (root == null) return;
+
+        convertToDLL(root.left);
+
+        if (prev == null) head = root;
+        else {
+            root.left = prev;
+            prev.right = root;
+        }
+        prev = root;
+        convertToDLL(root.right);
+    }
+
+    public void printDLL(){
+
+        Node temp = head;
+
+        while (temp.right != null){
+            System.out.println(temp.value);
+            temp = temp.right;
+        }
     }
 }
