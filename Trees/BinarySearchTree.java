@@ -278,7 +278,7 @@ public class BinarySearchTree {
 
     //maximum height of binary tree
     public int heightBT(Node node){
-        if(node == null) return 0;
+        if(node == null) return -1;
         return Math.max(heightBT(node.left), heightBT(node.right)) + 1;
     }
 
@@ -456,5 +456,28 @@ public class BinarySearchTree {
             System.out.println(temp.value);
             temp = temp.right;
         }
+    }
+
+    // Diameter of a Binary tree : The diameter of a binary tree is the length of the longest
+    // path between any two nodes in a tree. This path may or may not pass through the root.
+
+    int diameter;
+    public int diameterOfBinaryTree(Node root){
+
+        diameter = 0;
+        height(root);
+        return diameter;
+    }
+    // diameter is updating in each recursion call.
+    public int height(Node node){
+
+        if (node == null) return 0;
+
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        diameter = Math.max(diameter, leftHeight+rightHeight);
+
+        return 1 + Math.max(leftHeight , rightHeight);
     }
 }
