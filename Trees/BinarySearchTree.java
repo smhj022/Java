@@ -1,6 +1,5 @@
 package Trees;
 
-import Heap.HeapQuestions;
 
 import javax.swing.tree.TreeNode;
 import java.util.*;
@@ -357,6 +356,17 @@ public class BinarySearchTree {
         }
     }
 
+    class ParentChildPair {
+
+        Node child;
+        Node parent;
+
+        ParentChildPair(Node child, Node parent){
+            this.child = child;
+            this.parent = parent;
+        }
+    }
+
     // Top View of Tree Map
     public List<Integer> topView(){
         Queue<Pair> queue = new LinkedList<>();
@@ -480,4 +490,44 @@ public class BinarySearchTree {
 
         return 1 + Math.max(leftHeight , rightHeight);
     }
+
+
+    // Cousins in the binary Tree
+    public boolean isCousins(Node root, int x, int y) {
+
+        Queue<ParentChildPair> queue = new LinkedList<>();
+
+        queue.offer(new ParentChildPair(root, null));
+
+        int level = 0;
+
+        while(!queue.isEmpty()){
+
+            int size = queue.size();
+            ParentChildPair x_pair = null;
+            ParentChildPair y_pair = null;
+
+            for(int i = 0; i < size; i++){
+
+                ParentChildPair curr = queue.poll();
+
+                if(curr.child.value == x) x_pair=curr;
+                else if(curr.child.value == y) y_pair=curr;
+
+                if(curr.child.left != null) queue.offer(new ParentChildPair(curr.child.left, curr.child));
+                if(curr.child.right != null) queue.offer(new ParentChildPair(curr.child.right, curr.child));
+            }
+
+            if( x_pair != null && y_pair != null){
+                if(x_pair.parent != y_pair.parent){
+                    return true;
+                }
+                else return false;
+            } else if ( x_pair != null || y_pair != null){
+                return false;
+            }
+        }
+        return false;
+    }
+
 }

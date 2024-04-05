@@ -9,10 +9,13 @@ public class main {
         BinarySearchTree myBST = new BinarySearchTree();
 
 
-        myBST.insert(1);
+        myBST.insert(3);
         myBST.insert(2);
+        myBST.insert(4);
+        myBST.insert(1);
+        myBST.insert(5);
 
-        System.out.println(myBST.heightBT(myBST.root));
+        System.out.println(myBST.isCousins(myBST.root, 1, 5));
 
 
     }
