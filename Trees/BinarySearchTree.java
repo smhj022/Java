@@ -530,4 +530,24 @@ public class BinarySearchTree {
         return false;
     }
 
+    // function to check if the tree is subtree of another tree
+    public boolean isSubtree(Node root, Node subRoot) {
+
+        if(root == null) return false;
+
+        return isIdentical(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    }
+
+    // function if two BT are identical or not
+    public boolean isIdentical(Node node1, Node node2){
+
+        if(node1 == null && node2 == null ) return true;
+
+        if(node1 == null || node2 == null) return false;
+
+        if(node1.value != node2.value) return false;
+
+        return isIdentical(node1.left, node2.left) && isIdentical(node1.right, node2.right);
+    }
+
 }
