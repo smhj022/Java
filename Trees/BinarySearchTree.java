@@ -550,4 +550,28 @@ public class BinarySearchTree {
         return isIdentical(node1.left, node2.left) && isIdentical(node1.right, node2.right);
     }
 
+
+
+    // Root to leaf sum
+
+    ArrayList<Integer> result = new ArrayList<>();
+
+    public List<Integer> rootToLeafSum(Node root){
+        if (root == null) return null;
+        rootToLeafSumUtil(root, 0);
+        return result;
+    };
+
+    public void rootToLeafSumUtil(Node node, int val){
+
+        if(node == null) return;
+
+        if(node.left == null && node.right == null) {
+            result.add(val+node.value);
+            return;
+        }
+        rootToLeafSumUtil(node.left, val + node.value);
+        rootToLeafSumUtil(node.right, val + node.value);
+    }
+
 }
