@@ -235,45 +235,6 @@ public class BinarySearchTree {
         return DFSPostOrder(root, new ArrayList<Integer>());
     }
 
-    public boolean getPath(Node node, ArrayList<Integer> arr, int val){
-
-        if(node == null){
-            return false;
-        }
-
-        arr.add(node.value);
-
-        if(node.value == val) return true;
-
-        if(getPath(node.left, arr, val) || getPath(node.right, arr, val)){
-            return true;
-        }
-
-        arr.remove(arr.size()-1);
-        return false;
-    }
-
-
-    public ArrayList<Integer> findPathOfNode(int val){
-        ArrayList<Integer> arr = new ArrayList<>();
-        getPath(root, arr, val);
-        return arr;
-    }
-
-
-    public List<Integer> leftSubTreeTravesal(Node node, List<Integer> arr){
-
-        if(node != null){
-            arr.add(node.value);
-            leftSubTreeTravesal(node.left, arr);
-            leftSubTreeTravesal(node.right, arr);
-
-            if (node.right == null && node.left != null) {
-                arr.add(null);
-            }
-        }
-        return arr;
-    }
 
     //maximum height of binary tree
     public int heightBT(Node node){
@@ -570,8 +531,68 @@ public class BinarySearchTree {
             result.add(val+node.value);
             return;
         }
-        rootToLeafSumUtil(node.left, val + node.value);
-        rootToLeafSumUtil(node.right, val + node.value);
+        val += node.value;
+        rootToLeafSumUtil(node.left, val);
+        rootToLeafSumUtil(node.right, val);
     }
 
+    // find all the paths of a Binary Tree
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> allPaths(Node root){
+
+        List<Integer> currPath = new ArrayList<>();
+
+        paths(root, currPath);
+        return res;
+    }
+
+    public void paths(Node node, List<Integer> currentPath){
+
+        if(node == null) return;
+
+        currentPath.add(node.value);
+
+        if(node.left == null && node.right == null){
+            res.add(new ArrayList<>(currentPath));
+        }
+
+        paths(node.left, currentPath);
+        paths(node.right, currentPath);
+        currentPath.remove(currentPath.size()-1);
+    }
+
+    // find if the value present in the binary tree or not;
+
+    public boolean findVal(Node node, int val){
+
+        if(node == null) return false;
+
+        if(node.value == val) return true;
+
+        return findVal(node.left, val) || findVal(node.right, val);
+    }
+
+    // find the path of given value from the root;
+    List<Integer> pathRes = new ArrayList<>();
+
+    public List<Integer> findPath(Node root, int val){
+        findPathUtil(root, val);
+        return pathRes;
+    }
+    public boolean findPathUtil(Node node, int val){
+
+        if(node == null) return false;
+
+        pathRes.add(node.value);
+
+        if(node.value == val) {
+            return true;
+        }
+        if( findPathUtil(node.left, val) || findPathUtil(node.right, val)){
+            return true;
+        }
+
+        pathRes.remove(pathRes.size() -1);
+        return false;
+    }
 }
