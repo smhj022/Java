@@ -1,13 +1,12 @@
 package Trees;
 
 
-import javax.swing.tree.TreeNode;
 import java.util.*;
 
 public class BinarySearchTree {
     Node root;
 
-    public class Node {
+    public static class Node {
 
         int value;
         Node left;
@@ -18,6 +17,7 @@ public class BinarySearchTree {
         }
     }
 
+
     public void getRootLeft() {
         System.out.println(root.left.value);
     }
@@ -26,7 +26,9 @@ public class BinarySearchTree {
         System.out.println(root.right.value);
     }
 
-    public boolean insert(int value) {
+    // function to insert the node in a binary search tree.
+    // this function ensure that there will be no duplicates
+    public boolean insertBT(int value) {
 
         Node newNode = new Node(value);
 
@@ -57,6 +59,8 @@ public class BinarySearchTree {
         }
     }
 
+
+    // Iterative function to check if the given value is available in the binary search Tree.
     public boolean contains(int value) {
 
         if (root == null) return false;
@@ -75,7 +79,7 @@ public class BinarySearchTree {
         return false;
     }
 
-
+    // Iterative function to check if the given value is available in the binary search Tree.
     private boolean rContains(Node currentNode, int value) {
 
         if (currentNode == null) return false;
@@ -92,6 +96,7 @@ public class BinarySearchTree {
         return rContains(root, value);
     }
 
+    // Iterative Method to insert the value in a binary search tree.
     private Node rInsert(Node currentNode, int value) {
 
         if (currentNode == null) return new Node(value);
@@ -109,44 +114,16 @@ public class BinarySearchTree {
         rInsert(root, value);
     }
 
-    public int minValue(Node currentNode) {
+
+    // function to find the minimum value of the given tree.
+    public int leftMinValue(Node currentNode) {
         while (currentNode.left != null) {
             currentNode = currentNode.left;
         }
         return currentNode.value;
     }
 
-
-//    public boolean removeNode(int value){
-//
-//        if(root == null) return false;
-//
-//        Node currentNode = root;
-//        Node parentNode = null;
-//
-//        while(currentNode != null){
-//
-//            if (currentNode.value < value){
-//                parentNode = currentNode;
-//                currentNode = currentNode.left;
-//            } else if (currentNode.value > value) {
-//                parentNode = currentNode;
-//                currentNode = currentNode.right;
-//            }else if (parentNode !=null ){
-//                if(currentNode.left == null && currentNode.right ==null ){
-//                    currentNode = null;
-//                } else if (currentNode.right == null) {
-//                    parentNode = currentNode.left;
-//                } else if (currentNode.left == null) {
-//                    parentNode = currentNode.right;
-//                }
-//                return true;
-//            }
-//        }
-//
-//
-//    }
-
+    // function to delete a node from a binary search Tree.
     private Node deleteNode(Node currentNode, int value) {
 
         if (currentNode == null) return null;
@@ -167,8 +144,8 @@ public class BinarySearchTree {
                 currentNode = currentNode.right;
                 // node on left and right
             } else {
-                // minimum value on right subTree.
-                int subTreeMin = minValue(currentNode.right);
+                // left most minimum value on right subTree.
+                int subTreeMin = leftMinValue(currentNode.right);
                 currentNode.value = subTreeMin;
                 currentNode.right = deleteNode(currentNode.right, subTreeMin);
             }
@@ -177,13 +154,15 @@ public class BinarySearchTree {
 
 
     }
-
     public void deleteNode(int value) {
         deleteNode(root, value);
     }
 
+    //****************************************************************************************************//
+    //**************************************TREE TRAVERSAL************************************************//
+    //****************************************************************************************************//
 
-    // Tree Traversal using Breadth First search (Level Order Traversal)
+    // 1) Breadth First Search (Level Order Traversal)
     public ArrayList<Integer> BFS() {
 
         Node currentNode = root;
@@ -204,9 +183,11 @@ public class BinarySearchTree {
         return results;
     }
 
-    // Tree traversal Depth First Search
+    // 2) Depth First Search
 
-    //PreOrder
+    // i) PreOrder -> NLR
+    // ii) PostOrder -> LRN
+    // iii) InOrder -> LNR
     private ArrayList<Integer> DFSPreOrder(Node node, ArrayList<Integer> results) {
         if (node != null) {
             results.add(node.value);
@@ -235,15 +216,27 @@ public class BinarySearchTree {
         return DFSPostOrder(root, new ArrayList<Integer>());
     }
 
-
-    //maximum height of binary tree
-    public int heightBT(Node node){
-        if(node == null) return -1;
-        return Math.max(heightBT(node.left), heightBT(node.right)) + 1;
+    private ArrayList<Integer> DFSInOrder(Node node, ArrayList<Integer> results) {
+        if (node != null) {
+            DFSInOrder(node.left, results);
+            DFSInOrder(node.right, results);
+            results.add(node.value);
+        }
+        return results;
     }
 
+    public ArrayList<Integer> DFSInOrder() {
+        return DFSInOrder(root, new ArrayList<Integer>());
+    }
 
-    // Size of Binary Tree (Number of nodes)
+    //*******************************************************************************************************//
+    //********************************** Basics of Binary Tree **********************************************//
+    //*******************************************************************************************************//
+
+
+    //maximum height of binary tree -> height at root node is ZERO
+    //maximum height of binary tree -> height at root node is ZERO
+    // Size of Binary Tree -> Total number of nodes in a Binary Tree.
     public int sizeBT(Node node){
         if(node == null) return 0;
         return sizeBT(node.left) + sizeBT(node.right) + 1;
@@ -255,11 +248,13 @@ public class BinarySearchTree {
         return Math.max(node.value, Math.max(maxNodeValue(node.left), maxNodeValue(node.right)));
     }
 
-    // Questions Based on Breath First Search
+    //******************************************************************************************************//
+    //****************************Questions Based on Breath First Search***********************************//
+    //*****************************************************************************************************//
 
-    // Question 1: Right side view of a BST.
+    // Right side view of a BST.
 
-    //Need to find the last element form all the level of the Tree using Queue
+    // Recursive Approach: Need to find the last element form all the level of the Tree using Queue
     public List<Integer> rightSideView(Node root) {
 
         Queue<Node> queue = new LinkedList<>();
@@ -287,7 +282,7 @@ public class BinarySearchTree {
         return results;
     }
 
-    // find the left view of Binary search Tree. using HashMap
+    // Iterative Approach : find the left view of Binary search Tree. using HashMap
     public List<Integer> leftSideView(Node node){
 
         List<Integer> result = new ArrayList<>();
@@ -305,42 +300,36 @@ public class BinarySearchTree {
         leftViewUtil(res, node.right, level+1);
     }
 
-    class Pair{
+    // TopView : TopView of a binary Tree:
+    // Using the concept of horizontal distance from the center.
+
+
+    // class that create the pair of node and its horizontal distance from the center.
+    static class PairHD{
 
         // horizontal distance of Node from the center
         int hd;
         Node node;
 
-        public Pair(int hd, Node node) {
+        public PairHD(int hd, Node node) {
             this.hd = hd;
             this.node = node;
         }
     }
 
-    class ParentChildPair {
-
-        Node child;
-        Node parent;
-
-        ParentChildPair(Node child, Node parent){
-            this.child = child;
-            this.parent = parent;
-        }
-    }
-
     // Top View of Tree Map
     public List<Integer> topView(){
-        Queue<Pair> queue = new LinkedList<>();
+        Queue<PairHD> queue = new LinkedList<>();
 
         // Using tree Map, because it is already sorted
         Map<Integer, Integer> map = new TreeMap<>();
 
-        queue.add(new Pair(0, root));
+        queue.add(new PairHD(0, root));
 
         while (!queue.isEmpty()) {
 
             // Remove Pair from the queue
-            Pair currentPair = queue.poll();
+            PairHD currentPair = queue.poll();
 
             // checking if the pair is already in the map or not
             if(!map.containsKey(currentPair.hd)){
@@ -348,11 +337,11 @@ public class BinarySearchTree {
             }
 
             if (currentPair.node.left != null) {
-                queue.add(new Pair(currentPair.hd-1, currentPair.node.left));
+                queue.add(new PairHD(currentPair.hd - 1, currentPair.node.left));
             }
 
             if (currentPair.node.right != null) {
-                queue.add(new Pair(currentPair.hd+1, currentPair.node.right));
+                queue.add(new PairHD(currentPair.hd + 1, currentPair.node.right));
             }
         }
 
@@ -368,25 +357,25 @@ public class BinarySearchTree {
 
     // Bottom view of tree map
     public List<Integer> bottomView() {
-        Queue<Pair> queue = new LinkedList<>();
+        Queue<PairHD> queue = new LinkedList<>();
         Map<Integer, Integer> map = new TreeMap<>();
 
-        queue.add(new Pair(0, root));
+        queue.add(new PairHD(0, root));
 
         while (!queue.isEmpty()) {
 
             // Remove pair from the queue
-            Pair currentPair = queue.poll();
+            PairHD currentPair = queue.poll();
 
             // Update the value of key i.e. hd
             map.put(currentPair.hd, currentPair.node.value);
 
             if (currentPair.node.left != null) {
-                queue.add(new Pair(currentPair.hd - 1, currentPair.node.left));
+                queue.add(new PairHD(currentPair.hd - 1, currentPair.node.left));
             }
 
             if (currentPair.node.right != null) {
-                queue.add(new Pair(currentPair.hd + 1, currentPair.node.right));
+                queue.add(new PairHD(currentPair.hd + 1, currentPair.node.right));
             }
         }
 
@@ -399,11 +388,77 @@ public class BinarySearchTree {
         return topView;
     }
 
-    // flatten a Binary tree ( In Order traversal) without extra space
+    public int findNodeLevelFromRoot(Node node, int val){
 
+        if(node == null) return -1;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(node);
+        int level = 0;
+
+        while (!queue.isEmpty()){
+
+            int size = queue.size();
+
+            while (size > 0){
+                Node currNode = queue.poll();
+
+                if(currNode.value == val){
+                    return level;
+                }
+
+                if(currNode.left != null) {
+                    queue.offer(currNode.left);
+                }
+
+                if(currNode.right != null) {
+                    queue.offer(currNode.right);
+                }
+                size--;
+            }
+            level++;
+
+        }
+        //  not found;
+        return -1;
+    }
+
+    // Recursive approach to find the Leaf node of a Binary Tree.
+
+    public List<Integer> leafNode(Node node, List<Integer> leafNodeList){
+
+        if(node == null) return leafNodeList;
+
+        if(node.left == null && node.right == null)
+            leafNodeList.add(node.value);
+
+        leafNode(node.left, leafNodeList);
+        leafNode(node.right, leafNodeList);
+
+        return leafNodeList;
+    }
+
+    public List<Integer> leafNode(Node node){
+        List<Integer> leafNodeList = new ArrayList<>();
+        return leafNode(node, leafNodeList);
+    }
+
+    // *************************************************************************************************//
+
+    static class ParentChildPair {
+
+        Node child;
+        Node parent;
+
+        ParentChildPair(Node child, Node parent){
+            this.child = child;
+            this.parent = parent;
+        }
+    }
+
+    // flatten a Binary tree ( In Order traversal) without extra space
     Node prev = null;
     Node head = null;
-
     public void convertToDLL(Node root) {
 
         if (root == null) return;
@@ -420,9 +475,7 @@ public class BinarySearchTree {
     }
 
     public void printDLL(){
-
         Node temp = head;
-
         while (temp.right != null){
             System.out.println(temp.value);
             temp = temp.right;
@@ -434,7 +487,6 @@ public class BinarySearchTree {
 
     int diameter;
     public int diameterOfBinaryTree(Node root){
-
         diameter = 0;
         height(root);
         return diameter;
@@ -595,4 +647,320 @@ public class BinarySearchTree {
         pathRes.remove(pathRes.size() -1);
         return false;
     }
+
+    // Find all the nodes which are k distance from the root
+
+    public List<Integer> nodeAtDisKFromRoot(Node root, int k){
+        List<Integer> res = new ArrayList<>();
+        nodeAtDisKFromRootUtil(root, k, res);
+        return res;
+    }
+
+    public void nodeAtDisKFromRootUtil(Node node, int k, List<Integer> res){
+
+        if( node == null) return;
+
+        if(k == 0) {
+            res.add(node.value);
+        }
+
+        nodeAtDisKFromRootUtil(node.left, k-1, res);
+        nodeAtDisKFromRootUtil(node.right, k-1, res);
+    }
+
+
+    int dis = 0;
+
+    public Integer disFromRoot(Node node, int val){
+        disFromRootUtil(node, val);
+        return dis;
+    }
+
+    public boolean disFromRootUtil(Node node, int val){
+
+        if(node == null) return false;
+        dis += 1;
+
+        if(node.value == val) {
+            return true;
+        }
+        if(disFromRootUtil(node.left, val) || disFromRootUtil(node.right, val)){
+            return true;
+        }
+
+        dis -= 1;
+        return false;
+    }
+
+
+    public List<Integer> kDisFromNode(Node node, int k){
+
+        List<Integer> res = new ArrayList<>(nodeAtDisKFromRoot(node, k));
+
+        // find if given node is which side fo the root
+        boolean left = findVal(root.left, node.value);
+        boolean right = findVal(root.right, node.value);
+
+        // distance of node from root
+        List<Integer> path = findPath(root, node.value);
+        int disFromRoot = path.size() - 1;
+
+        int kFromRoot = k - disFromRoot;
+
+        if(kFromRoot == 0){
+            res.add(root.value);
+        }
+
+        else if(left){
+            if(kFromRoot > 0) res.addAll(nodeAtDisKFromRoot(root.right, kFromRoot-1));
+            else res.addAll(nodeAtDisKFromRoot(root.left, Math.abs(kFromRoot)-1));
+        }
+
+        else if(right){
+            if(kFromRoot > 0) res.addAll(nodeAtDisKFromRoot(root.left, kFromRoot-1));
+            else res.addAll(nodeAtDisKFromRoot(root.right, Math.abs(kFromRoot)-1));
+        }
+
+        return res;
+    }
+
+
+    //find if the Binary Tree can be divided not two half having equal sum
+
+    // find sum of all the node of a binary tree
+
+    public int nodeSum(Node node){
+
+        if(node == null) return 0;
+
+        return node.value + nodeSum(node.left) + nodeSum(node.right);
+    }
+
+    // Function to check if a Binary Tree can be divided into Two half,
+    // meaning the sum of all the  nodes is of both the half should be equal
+    public boolean intoHalf(Node root){
+
+        int sum =  nodeSum(root);
+
+        // if the sum of all the nodes is odd, the tree cant be divided into half.
+        // returing half,
+        if(sum%2 != 0) return false;
+
+        subTreeTargetSum(root, sum/2);
+        return found;
+    }
+
+
+    // Function to find the subTree having sum of all the nodes of subtree is equal to
+    // given target sum.
+    int currSum=0;
+    boolean found = false;
+    public int subTreeTargetSum(Node node, int targetSum){
+
+        if (node == null) return 0;
+
+        int leftSum = subTreeTargetSum(node.left, targetSum);
+        int rightSum = subTreeTargetSum(node.right, targetSum);
+
+        currSum = node.value + leftSum + rightSum;
+
+        if(targetSum == currSum){
+            found = true;
+        }
+        return currSum;
+    }
+
+    // function to find the distance between the node of a Binary Search Tree.
+    public int disBetweenNodeBST(Node node, int v1, int v2){
+
+        while(node!=null){
+
+            if(node.value > v1 && node.value > v2){
+                node = node.left;
+            }
+            else if(node.value < v1 && node.value < v2){
+                node = node.right;
+            }
+            else {
+                break;
+            }
+        }
+        return findNodeLevelFromRoot(node, v1) + findNodeLevelFromRoot(node, v2);
+    }
+
+
+
+
+    Node rootNode = null;
+    public Node sortedArrayToBST(final int[] A) {
+        sortedToBBST(A, 0, A.length-1);
+        return rootNode;
+    }
+
+    public Node sortedToBBST(int[] A, int start, int end){
+
+        if(start > end) return null;
+
+        int mid = (start + end) / 2;
+
+        Node currNode = new Node(A[mid]);
+
+        if (rootNode == null){
+            rootNode = currNode;
+        }
+
+        currNode.left = sortedToBBST(A, start, mid-1);
+        currNode.right = sortedToBBST(A, mid+1, end);
+
+        return currNode;
+    }
+
+
+    // Morris InOrder Traversal (without recursion)
+    // space complexity -> O(1)
+
+    public List<Integer> morrisInorder(Node root){
+
+        List<Integer> result = new ArrayList<>();
+
+        Node curr = root;
+
+        while (curr != null){
+
+            if(curr.left == null){
+                result.add(curr.value);
+                curr = curr.right;
+            } else {
+
+                Node leftChild = curr.left;
+
+                while (leftChild.right != null){
+                    leftChild = leftChild.right;
+                }
+
+                leftChild.right = curr;
+                Node temp = curr;
+                curr = curr.left;
+                temp.left = null;
+            }
+        }
+
+        return result;
+    }
+
+
+    // Boundary Traversal of binary Tree
+
+    public int[] boundaryTraversal(Node root){
+
+        List<Integer> leftSide = new ArrayList<>();
+        List<Integer> rightSide = new ArrayList<>();
+        List<Integer> bottomLevel = new ArrayList<>();
+
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+
+            int size = queue.size();
+
+            for(int i = 0 ; i < size; i++){
+
+                Node currNode = queue.poll();
+
+                if(i == 0){
+                    leftSide.add(currNode.value);
+                }
+
+                if (i == (size - 1)){
+                    rightSide.add(currNode.value);
+                }
+
+                if(currNode.left != null) queue.offer(currNode.left);
+                if(currNode.right != null) queue.offer(currNode.right);
+            }
+
+        }
+
+        System.out.println(leftSide);
+        System.out.println(rightSide);
+        bottomLevel = lastLevelBT(root, bottomLevel);
+        System.out.println(bottomLevel);
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        // Add all elements from A
+        for (int num : leftSide) {
+            if (!result.contains(num)) {
+                result.add(num);
+            }
+        }
+        // Add all elements from C
+        for (int num : bottomLevel) {
+            if (!result.contains(num)) {
+                result.add(num);
+            }
+        }
+
+        // Add all elements from B
+        for (int num : rightSide) {
+            if (!result.contains(num)) {
+                result.add(num);
+            }
+        }
+
+
+
+
+        int[] output = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            output[i] = result.get(i);
+        }
+
+        return output;
+
+
+
+    }
+
+    public List<Integer> lastLevelBT(Node node, List<Integer> bottomLevel) {
+        if (node == null) return bottomLevel;
+
+        lastLevelBT(node.left, bottomLevel);
+
+        if (node.left == null && node.right == null) {
+            bottomLevel.add(node.value);
+        }
+        lastLevelBT(node.right, bottomLevel);
+
+        return bottomLevel;
+    }
+
+    int maxSum;
+    public int maxPathSum(Node root){
+        maxSum = Integer.MIN_VALUE;
+        sumAtNode(root);
+        return maxSum;
+    }
+
+    public int sumAtNode(Node node){
+
+        if(node == null) return 0;
+
+        int leftSum = sumAtNode(node.left);
+        int rightSum = sumAtNode(node.right);
+
+        int currSum = node.value + leftSum + rightSum;
+
+        if (currSum> maxSum){
+            maxSum = currSum;
+        }
+
+        return node.value + Math.max(leftSum, rightSum);
+
+    }
+
+
+
 }

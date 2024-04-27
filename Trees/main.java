@@ -1,6 +1,7 @@
 package Trees;
 
-import java.util.ArrayList;
+import java.util.*;
+
 
 public class main {
     public static void main(String[] args) {
@@ -8,22 +9,23 @@ public class main {
 
         BinarySearchTree myBST = new BinarySearchTree();
 
-        myBST.insert(10);
-        myBST.insert(7);
-        myBST.insert(15);
-        myBST.insert(6);
-        myBST.insert(8);
-        myBST.insert(3);
-        myBST.insert(11);
-        myBST.insert(16);
-        myBST.insert(12);
+        myBST.insertBT(-10);
+        myBST.insertBT(7);
+        myBST.insertBT(15);
+//        myBST.insertBT(6);
+//        myBST.insertBT(8);
+//        myBST.insertBT(3);
+        myBST.insertBT(11);
+        myBST.insertBT(13);
+        myBST.insertBT(14);
+        myBST.insertBT(16);
+        myBST.insertBT(12);
+
+        System.out.println(myBST.BFS());
 
         System.out.println(myBST.allPaths(myBST.root));
-        System.out.println(myBST.rootToLeafSum(myBST.root));
 
-        System.out.println(myBST.findVal(myBST.root, 7));
-
-        System.out.println(myBST.findPath(myBST.root, 12));
-
+        System.out.println(myBST.maxPathSum(myBST.root));
     }
+
 }
