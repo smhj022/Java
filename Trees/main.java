@@ -9,23 +9,24 @@ public class main {
 
         BinarySearchTree myBST = new BinarySearchTree();
 
-        myBST.insertBT(-10);
+        myBST.insertBT(10);
         myBST.insertBT(7);
         myBST.insertBT(15);
-//        myBST.insertBT(6);
-//        myBST.insertBT(8);
-//        myBST.insertBT(3);
+        myBST.insertBT(6);
+        myBST.insertBT(8);
+        myBST.insertBT(3);
         myBST.insertBT(11);
         myBST.insertBT(13);
         myBST.insertBT(14);
         myBST.insertBT(16);
         myBST.insertBT(12);
 
+        System.out.println(myBST.DFSPreOrder());
+
+        myBST.flatten();
+
         System.out.println(myBST.BFS());
 
-        System.out.println(myBST.allPaths(myBST.root));
-
-        System.out.println(myBST.maxPathSum(myBST.root));
     }
 
 }

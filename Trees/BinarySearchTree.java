@@ -960,6 +960,40 @@ public class BinarySearchTree {
         return node.value + Math.max(leftSum, rightSum);
 
     }
+    public void flatten() {
+
+        if (root == null) return;
+
+        Queue<Node> queue = new LinkedList<>();
+
+        DFSPreOrderQueue(root, queue);
+
+        Node curr = root;
+
+        System.out.println(queue);
+
+        while (!queue.isEmpty()) {
+            curr = queue.poll();
+            System.out.println(curr.value);
+            if(queue.peek() != null){
+                curr.right = queue.peek();
+                curr.left = null;
+            }
+            else {
+                curr.right = curr.left = null;
+            }
+
+        }
+    }
+
+    private Queue<Node> DFSPreOrderQueue(Node node, Queue<Node> result){
+        if (node != null) {
+            result.add(node);
+            DFSPreOrderQueue(node.left, result);
+            DFSPreOrderQueue(node.right, result);
+        }
+        return result;
+    }
 
 
 
