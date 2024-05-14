@@ -2,9 +2,9 @@ package LinkedList.src;
 
 import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.SQLOutput;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.lang.Math;
+
 public class LinkedList {
 
     // Variable head of Node type
@@ -373,8 +373,6 @@ public class LinkedList {
             Node nodeToMove = currentNode.next;
             currentNode.next = nodeToMove.next;
             nodeToMove.next = previousNode.next;
-            previousNode.next = nodeToMove;
-            printList();
         }
 
         head = dummyNode.next;
@@ -574,4 +572,183 @@ public class LinkedList {
         return head;
     };
 
+    public Node reverseBetween(Node head, int left, int right) {
+
+        Stack<Integer> nodeVal = new Stack<>();
+
+        Node temp = head;
+        int posi = 1;
+
+        while(temp != null) {
+
+            if (posi >= left && posi <= right) {
+                System.out.println(temp.value);
+                nodeVal.push(temp.value);
+            }
+            temp = temp.next;
+            posi++;
+        }
+
+        temp = head;
+        posi = 1;
+
+        while(temp != null){
+            if(posi >= left && posi <= right){
+                int val = nodeVal.pop();
+                System.out.println(val);
+                temp.value = val;
+            }
+            temp = temp.next;
+            posi++;
+        }
+
+        return head;
+
+    }
+
+
+    public int numComponents(Node node, int[] nums){
+
+        Node temp = node;
+
+        HashSet<Integer> hs = new HashSet<>();
+
+        int maxRes = nums.length;
+
+        for(int num : nums){
+            hs.add(num);
+        }
+
+        boolean connected = false;
+
+        while(temp != null && temp.next != null){
+
+            if(hs.contains(temp.value)){
+                if(connected) {
+                    maxRes--;
+                } else {
+                    connected = true;
+                }
+            } else {
+                connected = false;
+            }
+            temp = temp.next;
+        }
+
+        return maxRes;
+    }
+
+    public Node removeNthFromEnd(Node A, int B) {
+
+        Node dummy = new Node(-1);
+
+        dummy.next = A;
+
+        Node p1 = dummy;
+        Node p2 = dummy;
+
+        for(int i = 0; i <= B; i++){
+            if(p1 == null){
+                return dummy.next;
+            }
+            p1 = p1.next;
+        }
+
+        while(p1 != null){
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        p2.next = p2.next.next;
+
+        head = dummy.next;
+        printList();
+
+        return A;
+    }
+
+    public Node reverseListByK(Node head, int k){
+
+        if(head == null || head.next == null) return head;
+
+        Node p1 = null;
+        Node p2 = head;
+        Node p3 = head;
+
+        int iter = 0;
+        while(p2 != null && iter < k){
+            Node temp = p2;
+            p2 = p2.next;
+            temp.next = p1;
+            p1 = temp;
+            iter--;
+        }
+
+        p3.next = reverseListByK(p2, k);
+
+        return p1;
+    }
+
+    public Node reverseKNodes(Node node, int k){
+
+        if(node == null || node.next == null) return node;
+
+        Node p1 = node;
+        Node p2 = null;
+        Node p3 = node;
+
+        while(p1 != null && k > 0){
+            Node temp = p1;
+            p1 = p1.next;
+            temp.next = p2;
+            p2 = temp;
+            k--;
+        }
+
+        p3.next = p1;
+
+        return p2;
+    }
+
+    // Question find the maximum Length of palindrome in a linked list
+
+    public int countSimilar(Node h1, Node h2){
+
+        int count = 0;
+
+        while(h1 != null && h2 != null){
+            if(h1.value != h2.value){
+                return count;
+            }
+            count++;
+            h1 = h1.next;
+            h2 = h2.next;
+        }
+
+        return count;
+    }
+
+    public int maxPalindrome(Node node){
+
+        if(node == null) return 0;
+        if(node.next == null) return 1;
+
+        Node curr = node;
+        Node prev = null;
+
+        int maxRes = 0;
+
+        while(curr != null){
+
+            maxRes = Math.max(maxRes, 2*countSimilar(curr, prev));
+            maxRes = Math.max(maxRes, 2*countSimilar(curr.next, prev)+1);
+
+            Node temp = curr;
+            curr = curr.next;
+            temp.next = prev;
+            prev = temp;
+
+        }
+        return maxRes;
+    }
 }
