@@ -500,7 +500,6 @@ public class LinkedList {
         Node p2 = list2.head;
         Node p3 = dummy;
 
-        System.out.println("iteration 1 " + p1.value + " " + p2.value + " " + p3.value);
 
         while (p1!=null && p2!=null){
 
@@ -526,7 +525,6 @@ public class LinkedList {
             p3 = p3.next;
         }
 
-        printList();
     }
 
 
@@ -727,7 +725,6 @@ public class LinkedList {
 
         return count;
     }
-
     public int maxPalindrome(Node node){
 
         if(node == null) return 0;
@@ -750,5 +747,99 @@ public class LinkedList {
 
         }
         return maxRes;
+    }
+
+
+    public Node partition(Node A, int B) {
+        Node dummy = new Node(-1);
+        dummy.next = A;
+
+        Node p1 = dummy;
+        Node p2 = dummy;
+
+        while (p1.next != null) {
+
+            if (p1.next.value >= B) {
+                break;
+            }
+
+            p1 = p1.next;
+        }
+
+        p2 = p1.next;
+
+        while(p2 != null && p2.next != null){
+            if(p2.next.value < B){
+                Node temp = p2.next;
+                p2.next = p2.next.next;
+
+                temp.next = p1.next;
+                p1.next = temp;
+                p1 = temp;
+            }
+            p2 = p2.next;
+        }
+
+        return dummy.next;
+    }
+
+
+    public Node[] splitListToParts(Node head, int k) {
+
+        Node temp = head;
+        int size = 0;
+
+        while(temp != null){
+            size++;
+            temp = temp.next;
+        }
+
+        Node[] res = new Node[k];
+
+        int nodeParPart = size/k;
+        int iter = 0;
+        temp = head;
+
+        if (k >= size){
+            while(temp != null){
+                Node curr = temp;
+                temp = temp.next;
+                curr.next = null;
+                res[iter++] = curr;
+            }
+        } else{
+
+            int diff = size - nodeParPart*k;
+
+            while(k>0){
+                int noOfNode;
+
+                if(diff > 0){
+                    noOfNode = nodeParPart+1;
+                    diff--;
+                } else{
+                    noOfNode = nodeParPart;
+                }
+
+                Node curr = temp;
+
+                while(noOfNode - 1 > 0){
+                    curr = curr.next;
+                    noOfNode--;
+                }
+
+                Node temp2 = curr.next;
+                curr.next = null;
+
+                res[iter] = temp;
+                temp = temp2;
+
+                iter++;
+                k--;
+            }
+
+
+        }
+        return res;
     }
 }

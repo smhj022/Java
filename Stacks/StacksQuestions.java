@@ -1,5 +1,6 @@
 package Stacks;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /*
@@ -67,27 +68,175 @@ class StackSorting{
 }
 
 
+class Questions{
+
+    // Given an array of positive integers, for every given element i find the nearest elem
+    //on left which is smaller than A[i];
+
+    public int[] nextMinimumOnLeft(int[] nums){
+
+        Stack<Integer> stack = new Stack<>();
+
+        int[] res = new int[nums.length];
+
+        for(int i = 0 ; i < nums.length; i++){
+
+            if(stack.isEmpty()){
+                res[i] = -1;
+            } else {
+
+                while(!stack.isEmpty() && stack.peek() >= nums[i]){
+                    stack.pop();
+                }
+
+                if(stack.isEmpty()) {
+                    res[i] = -1;
+                } else {
+                    res[i] = stack.peek();
+                }
+            }
+            stack.push(nums[i]);
+        }
+
+        return res;
+    }
+
+    //LeetCode : 1475. Final Prices With a Special Discount in a Shop
+    public int[] finalPrices(int[] prices) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = prices.length-1; i >= 0; i--){
+
+            int elem = prices[i];
+
+            if(stack.isEmpty()){
+                stack.push(prices[i]);
+            } else {
+
+                while (!stack.isEmpty() && stack.peek() >= prices[i]) {
+                    stack.pop();
+                }
+
+                if (!stack.isEmpty()) {
+                    prices[i] -= stack.peek();
+                }
+
+                stack.push(elem);
+            }
+        }
+        return prices;
+    }
+
+    // Hard Problem:
+    //LeetCode : 84. Largest Rectangle in Histogram
+
+    public int largestRectangularArea(int[] heights){
+
+        int maxArea = 0;
+
+        Stack<Integer> stack = new Stack<>();
+
+        int[] left = new int[heights.length];
+        int[] right = new int[heights.length];
+
+        for(int i = 0; i < heights.length; i++){
+
+            if(stack.isEmpty()) {
+                left[i] = 0;
+            } else{
+                while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+                    stack.pop();
+                }
+                if(stack.isEmpty()) left[i] = 0;
+                else left[i] = stack.peek()+1;
+            }
+            stack.push(i);
+        }
+
+        while (!stack.isEmpty()){
+            stack.pop();
+        }
+
+        for(int i = heights.length - 1; i >= 0 ; i--){
+
+            if(stack.isEmpty()){
+                right[i] = heights.length -1;
+            } else {
+                while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+                    stack.pop();
+                }
+                if(stack.isEmpty()) right[i] = heights.length -1;
+                else right[i] = stack.peek()-1;
+            }
+            stack.push(i);
+        }
+
+        for(int i = 0; i < left.length; i++){
+            int area = (right[i] - left[i] + 1) * heights[i];
+            if(maxArea < area) maxArea = area;
+        }
+
+        return maxArea;
+    }
+
+    // Hard Problem 224: basic calculator :
+    public int calculate(String s) {
+
+        int number = 0;
+        int result = 0;
+        int sign = 1;
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+
+            if (c == ' ') continue;
+
+            if (c == '+') {
+                result += sign * number;
+                sign = 1;
+                number = 0;
+            } else if (c == '-') {
+                result += sign * number;
+                sign = -1;
+                number = 0;
+            } else if (c == '(') {
+                stack.push(result);
+                stack.push(sign);
+                result = 0;
+                number = 0;
+                sign = 1;
+            } else if (c == ')') {
+                result += sign * number;
+                result *= stack.pop();
+                result += stack.pop();
+                sign = 1;
+                number = 0;
+            } else {
+                number = number * 10 + Character.getNumericValue(c);
+            }
+        }
+
+        result += sign*number;
+
+        return result;
+    }
+
+}
 public class StacksQuestions{
     public static void main(String[] args) {
 
-        Parentheses parentheses = new Parentheses();
+        Questions ques = new Questions();
 
-        System.out.println(parentheses.isBalancedParentheses("(()()()())"));
+        int[] arr = new int[]{2,1,3,5,4,3,4,6};
 
-        Stack<Integer> stack = new Stack<>();
-        stack.push(3);
-        stack.push(2);
-        stack.push(0);
-        stack.push(1);
-        stack.push(4);
+        System.out.println(Arrays.toString(ques.nextMinimumOnLeft(arr)));
 
-        StackSorting sorting = new StackSorting();
 
-        sorting.sortStack(stack);
+        String s = "23+1";
 
-        for (int i = stack.size()-1; i >= 0; i--) {
-            System.out.println(stack.get(i));
-        }
+        System.out.println(ques.calculate(s));
 
     }
 }
