@@ -223,6 +223,40 @@ class Questions{
         return result;
     }
 
+
+
+    // LeetCode problem 71 : Simplify Path (difficulty medium);
+    public String simplifyPath(String path){
+
+        Stack<String> stack = new Stack<>();
+
+        for(String name: path.split("/")){
+            if(name.isEmpty()) continue;
+
+            if(name.equals("..")){
+                if(!stack.isEmpty()) stack.pop();
+            }
+
+            else if(name.equals(".")) continue;
+
+            else{
+                stack.push(name);
+            }
+        }
+
+        if(stack.isEmpty()) return "/";
+
+        StringBuilder sb = new StringBuilder();
+
+        for(String s: stack){
+            sb.append("/");
+            sb.append(s);
+
+        }
+
+        return sb.toString();
+    }
+
 }
 public class StacksQuestions{
     public static void main(String[] args) {
@@ -233,10 +267,4 @@ public class StacksQuestions{
 
         System.out.println(Arrays.toString(ques.nextMinimumOnLeft(arr)));
 
-
-        String s = "23+1";
-
-        System.out.println(ques.calculate(s));
-
-    }
 }
