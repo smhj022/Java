@@ -3,6 +3,8 @@ package Queues;
 // Queue are the linear data structure that follows a particular order in
 // which operations are performed. -> LastInFirstOut
 
+import LinkedList.src.LinkedList;
+
 public class Queue {
 
     private Node first;

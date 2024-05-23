@@ -263,8 +263,9 @@ public class StacksQuestions{
 
         Questions ques = new Questions();
 
-        int[] arr = new int[]{2,1,3,5,4,3,4,6};
+        int[] arr = new int[]{2, 1, 3, 5, 4, 3, 4, 6};
 
         System.out.println(Arrays.toString(ques.nextMinimumOnLeft(arr)));
+    }
 
 }
