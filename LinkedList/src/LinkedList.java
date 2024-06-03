@@ -864,14 +864,50 @@ public class LinkedList<I extends Number> {
 
         }
 
-        Node temp2 = dummy;
-
-        while(temp2 != null){
-            System.out.print(temp2.value + " ");
-            temp2 = temp2.next;
-        }
-        System.out.println(" ");
-
        return dummy.next;
+    }
+
+    public Node rotate(Node node, int k){
+
+        Node temp = node;
+        int nodeCount = 1;
+
+        while(temp.next != null){
+            temp = temp.next;
+            nodeCount++;
+        }
+
+        System.out.println(nodeCount);
+
+        temp.next = node;
+        temp = node;
+
+        int shift = nodeCount - k%nodeCount;
+
+
+        while (shift - 1  > 0){
+            temp = temp.next;
+            shift--;
+        }
+
+        head = temp.next;
+        temp.next = null;
+
+
+        printList();
+        return node;
+    }
+
+    public void check(){
+
+        Node temp = head;
+        int count = 2;
+
+        while(count > 0){
+            System.out.println(count + "," + temp.value);
+            temp = temp.next;
+            count--;
+        }
+
     }
 }
