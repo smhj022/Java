@@ -995,6 +995,15 @@ public class BinarySearchTree {
         return result;
     }
 
+    public int depth(Node root){
+
+        if(root == null) return -1;
+
+        if(root.left == null && root.right == null) return 0;
+
+        return Math.max(depth(root.left), depth(root.right)) + 1;
+    }
+
 
 
 

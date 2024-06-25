@@ -6,7 +6,6 @@ import java.util.*;
 public class main {
     public static void main(String[] args) {
 
-
         BinarySearchTree myBST = new BinarySearchTree();
 
         myBST.insertBT(10);
@@ -21,12 +20,7 @@ public class main {
         myBST.insertBT(16);
         myBST.insertBT(12);
 
-        System.out.println(myBST.DFSPreOrder());
-
-        myBST.flatten();
-
-        System.out.println(myBST.BFS());
-
+        System.out.println(myBST.depth(myBST.root.left));
     }
 
 }

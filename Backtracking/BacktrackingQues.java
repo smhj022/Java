@@ -1,7 +1,19 @@
 package Backtracking;
 import java.util.*;
 
+
 public class BacktrackingQues {
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int val) {
+            this.val = val;
+            left = right = null;
+        }
+    }
 
 
     // All the subset without duplicates
@@ -131,9 +143,9 @@ public class BacktrackingQues {
             return;
         }
 
-        res[numberSize - N] = 1;
+        res[numberSize - N] = 0;
         nDigitNumberUtil(N-1, res);
-        res[numberSize - N] = 2;
+        res[numberSize - N] = 1;
         nDigitNumberUtil(N-1, res);
     }
 
@@ -361,6 +373,180 @@ public class BacktrackingQues {
             sb.deleteCharAt(sb.length()-1);
         }
     }
+
+    // Rat in the maze problem
+
+    String direction = "DLRU";
+    int[] di = { 1, 0, 0, -1 };
+    int[] dj = { 0, -1, 1, 0 };
+
+    public List<String> mazePath(int[][] maze){
+        List<String> paths = new ArrayList<>();
+        int n = maze.length;
+        StringBuilder path = new StringBuilder();
+        findMazePath(maze, 0, 0, n, path, paths);
+        return paths;
+    }
+
+    public void findMazePath(int[][] maze, int i, int j, int n, StringBuilder path, List<String> paths){
+
+        if(i == n-1 && j == n-1){
+            paths.add(path.toString());
+            return;
+        }
+        maze[i][j] = 0;
+
+        for(int k=0; k < 4; k++){
+
+            int nexti = i +  di[k];
+            int nextj = j + dj[k];
+
+            if(isValidMazeBlock(maze, nexti, nextj, n)){
+                path.append(direction.charAt(k));
+                findMazePath(maze, nexti, nextj, n, path, paths);
+                path.deleteCharAt(path.length()-1);
+            }
+        }
+        maze[i][j] = 1;
+    }
+
+    public boolean isValidMazeBlock(int[][] maze, int i, int j, int n){
+        return i >= 0 && i < n && j >= 0 && j < n && maze[i][j] == 1;
+    }
+
+
+    boolean isFound;
+    public boolean wordSearch(char[][] board, String word){
+
+        int row = board.length;
+        int col = board[0].length;
+
+        int[][] block = new int[row][col];
+
+        isFound = false;
+
+        List<List<Integer>> initial = findInitial(board, word.charAt(0), row,col);
+
+        for(List<Integer> indices : initial){
+            checkWord(board, word, block, 0, indices.get(0), indices.get(1), row, col);
+            if(isFound) return true;
+        }
+        return isFound;
+    }
+
+    public void checkWord(char[][] board, String word, int[][] block, int index, int i, int j, int row, int col) {
+        if (index == word.length()) {
+            isFound = true;
+            return;
+        }
+
+        if(isValidWS(i,j,row,col, block) && board[i][j] == word.charAt(index)){
+            block[i][j] = 1;
+
+            for (int k = 0; k < 4; k++) {
+                int nexti = i + di[k];
+                int nextj = j + dj[k];
+                checkWord(board, word, block, index + 1, nexti, nextj, row, col);
+                if (isFound) return; // return immediately if word is found
+
+            }
+
+            block[i][j] = 0;
+
+        }
+    }
+
+    public List<List<Integer>> findInitial(char[][] board, char c, int row, int col){
+
+        List<List<Integer>> initialIndices = new ArrayList<>();
+
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                if(board[i][j] == c){
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(i);
+                    temp.add(j);
+                    initialIndices.add(temp);
+                }
+            }
+        }
+        return initialIndices;
+    }
+
+    public boolean isValidWS(int i, int j, int row, int col, int[][] block) {
+        return i >= 0 && i < row && j >= 0 && j < col && block[i][j] == 0;
+    }
+
+
+    public List<TreeNode> generateTrees(int n) {
+
+        List<TreeNode> result = new ArrayList<>();
+
+        backtrack(n, result, null, 1);
+
+        return result;
+
+    }
+
+
+    public void backtrack(int n, List<TreeNode> result, TreeNode curr, int index){
+
+        if(countNodes(curr) == n){
+            inorderRec(curr);
+            result.add(deepCopyRec(curr));
+            return;
+        }
+
+
+        for(int i = index; i <= n; i++){
+
+            TreeNode node = new TreeNode(i);
+            if(curr == null){
+                curr = node;
+            }
+
+            if(curr.val < node.val){
+                node.left = curr;
+                curr = node;
+            }
+
+            if(curr.val > node.val){
+                node.right = curr;
+                curr = node;
+            }
+
+            backtrack(n, result, curr, i+1);
+            curr = null;
+        }
+    }
+
+    public int countNodes(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + countNodes(node.left) + countNodes(node.right);
+    }
+
+    public TreeNode deepCopyRec(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode newNode = new TreeNode(root.val);
+        newNode.left = deepCopyRec(root.left);
+        newNode.right = deepCopyRec(root.right);
+
+        return newNode;
+    }
+
+    private void inorderRec(TreeNode root) {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.print(root.val + " ");
+            inorderRec(root.right);
+        }
+    }
+
 }
 
 
